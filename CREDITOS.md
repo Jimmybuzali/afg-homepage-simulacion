@@ -1,1 +1,1 @@
-Fotos de prueba de las ramas (Shop by branch): Unsplash, licencia libre de Unsplash. Solo para esta simulación; se reemplazan por fotos propias.
+Fotos de prueba de las ramas (Shop by branch): Unsplash, licencia libre de Unsplash. Space Force: foto oficial del gobierno de EE. UU. (Wikimedia Commons, dominio público). Solo para esta simulación; se reemplazan por fotos propias.

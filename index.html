@@ -80,9 +80,28 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .s .nav .sale{color:var(--red)}
 .s .burger{display:none}
 
-/* hero: imágenes arriba, texto debajo (nunca encima de la gente) */
+/* hero fijo de marca: imágenes arriba, texto debajo (nunca encima de la gente); más bajo para que la franja quede en la primera pantalla */
 .s .hero-im{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:#fff}
-.s .hero-im img{width:100%;aspect-ratio:4/5;max-height:820px;object-fit:cover;background:var(--beige)}
+.s .hero-im img{width:100%;aspect-ratio:4/5;max-height:470px;object-fit:cover;object-position:center 20%;background:var(--beige)}
+
+/* franja de promo: delgada, cambia por fecha (no un banner completo por descuento) */
+.s .strip{background:var(--navy);color:#fff;margin-top:24px}
+.s .hero-tx{padding-top:24px}
+.s .strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px 28px;flex-wrap:wrap;padding-top:20px;padding-bottom:20px}
+.s .strip .c{display:grid;gap:4px}
+.s .strip .t1{color:#fff;font-size:30px}
+.s .strip .t2{color:#c9d2db}
+.s .strip .t2 b{color:#fff;font-weight:500}
+.s .strip .tag{display:inline-block;border:1px solid var(--red);color:#fff;background:var(--red);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;padding:3px 8px;margin-right:8px;vertical-align:2px}
+.s .strip .b{display:flex;gap:10px;flex-wrap:wrap}
+.s .strip .btn{background:#fff;color:var(--ink)}
+.s .strip.big .wrap{padding-top:38px;padding-bottom:38px}
+.s .strip.big .t1{font-size:48px}
+
+/* regalos: atajos chicos, sin banner */
+.s .gifts{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
+.s .gifts a{background:var(--beige);padding:26px 18px;display:grid;gap:4px}
+.s .gifts .t1{font-size:22px}
 .s .hero-tx{padding:34px var(--pad) 0;max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
 .s .hero-tx .c{display:grid;gap:10px}
 .s .hero-tx .b{display:flex;gap:10px;flex-wrap:wrap}
@@ -92,7 +111,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .s .sh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px}
 
 /* ramas */
-.s .brs{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.s .brs{display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
 .s .br{display:grid;gap:12px;align-content:start}
 .s .br .im{aspect-ratio:4/5;overflow:hidden;background:#ddd}
 .s .br img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
@@ -114,7 +133,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 /* army vs navy */
 .s .camp{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .s .camp a{position:relative;overflow:hidden}
-.s .camp img{width:100%;aspect-ratio:4/5;max-height:760px;object-fit:cover;object-position:center 25%}
+.s .camp img{width:100%;aspect-ratio:1/1;max-height:520px;object-fit:cover;object-position:center 25%}
 .s .camp a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 65%,rgba(11,31,51,.7))}
 .s .camp .t1{position:absolute;z-index:2;left:24px;bottom:22px;color:#fff;font-size:var(--h-sec)}
 
@@ -151,7 +170,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .s .br{gap:8px}
   .s .rail{grid-auto-columns:46%}
   .s .arrows{display:none}
-  .s .camp img{aspect-ratio:3/5}
+  .s .camp img{aspect-ratio:4/5}
+  .s .hero-im img{max-height:none;aspect-ratio:1/1;object-position:center 12%}
+  .s .hero-tx{padding-top:16px;gap:12px}
+  .s .t1.hero{font-size:34px}
+  .s .strip{margin-top:20px}
+  .s .strip .wrap{padding-top:16px;padding-bottom:16px}
+  .s .strip .t1{font-size:22px}
+  .s .strip .b{width:100%}
+  .s .strip .btn{flex:1;text-align:center}
+  .s .strip.big .wrap{padding-top:24px;padding-bottom:24px}
+  .s .strip.big .t1{font-size:32px}
+  .s .gifts{grid-template-columns:1fr 1fr}
+  .s .gifts a{padding:18px 14px}
+  .s .gifts .t1{font-size:18px}
   .s .camp .t1{left:12px;bottom:12px}
   .s .foot .wrap{flex-direction:column;padding-top:22px;padding-bottom:22px}
   .s .foot .ph{display:none}
@@ -160,7 +192,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <div class="ctl">
   <div class="ctl-in">
-    <strong>armedforcesgear.com · homepage nueva (simulación)</strong>
+    <strong>armedforcesgear.com · home con cambios chicos (simulación)</strong>
     <div class="ctl-g">
       <div class="seg" role="group" aria-label="Momento de la temporada">
         <button type="button" data-set="bogo" aria-pressed="true">Hoy (BOGO)</button>
@@ -178,7 +210,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 
 <div class="stage" id="stage"><div class="device"><div class="s bogo" id="site">
 
-  <div class="ann" data-note="Barra fija y permanente: envío gratis. La promo ya no se repite aquí; vive solo en el hero.">
+  <div class="ann" data-note="Barra de 1 línea: envío gratis desde $75 (el ticket promedio es $55–58, empuja a agregar una pieza). La promo vive en la franja.">
     <span data-st="bogo bf">Free shipping on orders over $75</span>
     <span data-st="gd">Order by December 15 for Christmas delivery</span>
   </div>
@@ -192,18 +224,21 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     <nav class="nav"><a>Army</a><a>Marine Corps</a><a>Navy</a><a>Air Force</a><a>Coast Guard</a><a>Space Force</a><a>Veteran</a><a>Gifts</a><a class="sale">Sale</a></nav>
   </header>
 
-  <!-- HERO (lo único que cambia por fecha) -->
-  <section data-st="bogo" data-note="HERO = el único banner que cambia según la fecha. Fotos arriba, texto abajo: nunca encima de la gente. Un titular, una línea, un botón.">
+  <!-- HERO FIJO DE MARCA (no cambia con cada descuento) -->
+  <section data-note="HERO FIJO. Ya no es un descuento: dice qué es AFG. Más bajo que antes (desktop 2880×1440 en total, celular 1080×1350) para que la franja de promo se vea sin bajar.">
     <div class="hero-im"><img src="img/g_navy_tee.jpg" alt="Mujer con playera gris de Navy en estudio beige"><img src="img/g_army_nike.jpg" alt="Hombre con hoodie verde Army Nike en estudio beige"></div>
-    <div class="hero-tx"><div class="c"><h1 class="t1 hero">Buy one, get one 50% off</h1><p class="t2">The AFG Collection, every branch. Code BOGONO26, through Sunday.</p></div><div class="b"><a class="btn">Shop the sale</a></div></div>
+    <div class="hero-tx"><div class="c"><h1 class="t1 hero">Gear for every branch</h1><p class="t2">Army, Marines, Navy, Air Force, Coast Guard and Space Force. Since 1996.</p></div><div class="b"><a class="btn">Shop by branch</a></div></div>
   </section>
-  <section data-st="bf" data-note="Black Friday: mismo molde, solo cambian las fotos y el texto.">
-    <div class="hero-im"><img src="img/g_cg.jpg" alt="Mujer con playera de Coast Guard en estudio beige"><img src="img/g_marines.jpg" alt="Hombre con el Marines Pack-N-Go en estudio beige"></div>
-    <div class="hero-tx"><div class="c"><h1 class="t1 hero">Black Friday, 20% off</h1><p class="t2">The Everyday Collection, every branch. Code BF2026, through Sunday.</p></div><div class="b"><a class="btn">Shop Black Friday</a></div></div>
+
+  <!-- FRANJA DE PROMO (lo único que cambia por fecha) -->
+  <section class="strip" data-st="bogo" data-note="FRANJA DELGADA: aquí vive el descuento de la semana, no en un banner gigante. Desktop 2880×600 / celular 1080×540 si se hace como imagen; mejor como texto (sección Rich text o Image with text del tema).">
+    <div class="wrap"><div class="c"><p class="t1">Buy one, get one 50% off</p><p class="t2"><span class="tag">Ends Sunday</span>The AFG Collection. Code <b>BOGONO26</b></p></div><div class="b"><a class="btn">Shop the sale</a></div></div>
   </section>
-  <section data-st="gd" data-note="Game Day: mismo molde con la foto de campaña. Cada lado en su foto, separados.">
-    <div class="hero-im pair"><img src="img/gd_navy_td.jpg" alt="Fan de Navy celebrando en el estadio"><img src="img/gd_army_td.jpg" alt="Fan de Army celebrando en el estadio"></div>
-    <div class="hero-tx"><div class="c"><h1 class="t1 hero">Army vs. Navy</h1><p class="t2">Game day is Saturday, December 12.</p></div><div class="b"><a class="btn">Shop Navy</a><a class="btn">Shop Army</a></div></div>
+  <section class="strip big" data-st="bf" data-note="BLACK FRIDAY: la misma franja al doble de alto (26–30 nov). Es la semana en que la gente entra buscando el descuento.">
+    <div class="wrap"><div class="c"><p class="t1">Black Friday, 20% off</p><p class="t2"><span class="tag">Through Sunday</span>The Everyday Collection, every branch. Code <b>BF2026</b></p></div><div class="b"><a class="btn">Shop Black Friday</a></div></div>
+  </section>
+  <section class="strip" data-st="gd" data-note="GAME DAY: misma franja, dos botones (cada lado por separado).">
+    <div class="wrap"><div class="c"><p class="t1">Army vs. Navy</p><p class="t2">Game day is Saturday, December 12.</p></div><div class="b"><a class="btn">Shop Navy</a><a class="btn">Shop Army</a></div></div>
   </section>
 
   <!-- RAMAS -->
@@ -216,6 +251,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
         <a class="br"><div class="im"><img src="img/m_navy.jpg" alt="Marinero de Navy en uniforme blanco"></div><span class="t1 tile">Navy</span></a>
         <a class="br"><div class="im"><img src="img/m_af.jpg" alt="Jet con letras U.S. Air Force"></div><span class="t1 tile">Air Force</span></a>
         <a class="br"><div class="im"><img src="img/m_cg.jpg" alt="Guardacostas de Coast Guard con helicópteros"></div><span class="t1 tile">Coast Guard</span></a>
+        <a class="br"><div class="im"><img src="img/m_sf.jpg" alt="Guardiana de Space Force con uniforme de gala"></div><span class="t1 tile">Space Force</span></a>
       </div>
     </div>
   </section>
@@ -237,12 +273,25 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </section>
 
   <!-- ARMY VS NAVY -->
-  <section class="sec" data-st="bogo bf" data-note="Hasta el 12 de diciembre. Dos fotos de campaña, cada lado separado; toda la foto es el botón.">
+  <section class="sec" data-note="Hasta el 12 de diciembre. Banner MEDIANO (antes era de pantalla completa): dos fotos cuadradas, cada lado separado; toda la foto es el botón.">
     <div class="wrap">
       <div class="sh"><h2 class="t1 sec">Army vs. Navy</h2><span class="t2">Saturday, December 12</span></div>
       <div class="camp">
         <a><img src="img/pos_navy.jpg" alt="Hombre con la full zip Navy Under Armour 2026 Rivalry"><span class="t1">Navy</span></a>
         <a><img src="img/pos_army.jpg" alt="Hombre con la hoodie Army Nike 2026 Rivalry"><span class="t1">Army</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGALOS -->
+  <section class="sec" data-note="Atajos chicos de regalo en vez de banners completos (Thoughtful gifts, A smarter way… se quitan). Cada cuadro lleva a una colección.">
+    <div class="wrap">
+      <div class="sh"><h2 class="t1 sec">Gifts</h2></div>
+      <div class="gifts">
+        <a><span class="t1">Under $30</span><span class="t2">Tees and hats</span></a>
+        <a><span class="t1">For Mom</span><span class="t2">Military mom gear</span></a>
+        <a><span class="t1">For Dad</span><span class="t2">Veteran and dad gear</span></a>
+        <a><span class="t1">Gift cards</span><span class="t2">Let them choose</span></a>
       </div>
     </div>
   </section>
