@@ -140,6 +140,40 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .foot .wrap{display:flex;justify-content:space-between;gap:16px 40px;flex-wrap:wrap;padding-top:32px;padding-bottom:32px}
 .s .foot ul{list-style:none;margin:0;padding:0;display:flex;gap:10px 26px;flex-wrap:wrap}
 
+
+/* v8: HERO foto de estudio con el texto en el espacio libre (sin degradado, sin franja) */
+.s .hero8{position:relative;background:#e8dccb}
+.s .hero8 img{width:100%;height:auto;aspect-ratio:1376/768;object-fit:cover}
+.s .hero8 .tx{position:absolute;top:50%;transform:translateY(-50%);right:max(var(--pad),calc((100% - 1400px)/2 + var(--pad)));width:min(27%,380px);display:grid;gap:14px;justify-items:start;color:var(--navy)}
+.s .hero8 .k{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#6b5b48}
+.s .hero8 h1{margin:0;font-size:clamp(30px,3.6vw,54px);line-height:.95;font-weight:900;text-transform:uppercase;color:var(--navy);letter-spacing:-.5px}
+.s .hero8 p{margin:0;font-size:15px;color:#3d3a36}
+.s .hero8 .code{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--navy);padding:6px 10px}
+.s .hero8 .b{display:flex;gap:8px;flex-wrap:wrap}
+/* ramas: mismo encuadre barbilla-cintura, mismo fondo */
+.s .brs8{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.s .brs8 a{display:grid;gap:10px}
+.s .brs8 .im{aspect-ratio:4/5;overflow:hidden;background:#e8dccb}
+.s .brs8 img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.s .brs8 a:hover img{transform:scale(1.04)}
+.s .brs8 .l{font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--navy);text-align:center}
+/* carrusel: que se note que se desliza */
+.s .railwrap{position:relative}
+.s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
+.s .rail{grid-auto-columns:calc((100% - 4*16px)/4.4)}
+.s .bar{height:3px;background:var(--line);margin-top:22px;position:relative;overflow:hidden}
+.s .bar i{position:absolute;left:0;top:0;bottom:0;width:30%;background:var(--navy);transition:left .2s}
+.s .hint{display:none;font-size:12px;color:var(--mute);letter-spacing:1px}
+.s .arrows button{width:42px;height:42px;font-size:20px;background:var(--navy);color:#fff;border:0}
+/* Army vs Navy: 2 fotos iguales de la campaña Rivalry */
+.s .avn8{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.s .avn8 a{position:relative;overflow:hidden}
+.s .avn8 img{width:100%;aspect-ratio:4/5;object-fit:cover;max-height:640px;transition:transform .8s ease}
+.s .avn8 a:hover img{transform:scale(1.03)}
+.s .avn8 a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,34,0) 62%,rgba(10,16,34,.8))}
+.s .avn8 .cap{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;display:flex;justify-content:space-between;align-items:end;gap:12px;color:#fff}
+.s .avn8 .cap b{font-size:clamp(22px,2.4vw,34px);font-weight:900;text-transform:uppercase;line-height:1}
+
 /* ============ CELULAR ============ */
 @container site (max-width: 640px){
   .s{--pad:16px;--gap:40px}
@@ -173,11 +207,24 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .brands{grid-template-columns:1fr 1fr;gap:8px}
   .s .trust{grid-template-columns:1fr;gap:18px;padding:26px 16px}
   .s .foot .wrap{flex-direction:column}
+
+  .s .hero8 img{aspect-ratio:4/3;object-position:12% 50%}
+  .s .hero8 .tx{position:static;transform:none;width:auto;padding:22px 16px 26px}
+  .s .hero8 h1{font-size:36px}
+  .s .hero8 .b .btn{flex:1;text-align:center}
+  .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
+  .s .rail{grid-auto-columns:44%}
+  .s .railwrap::after{width:50px}
+  .s .hint{display:inline}
+  .s .avn8{gap:8px}
+  .s .avn8 .cap{left:12px;right:12px;bottom:12px;flex-direction:column;align-items:start}
+  .s .avn8 .cap .btn{padding:10px 14px}
+  .s .avn8 .cap b{display:none}
 }
 </style>
 
 <div class="ctl"><div class="ctl-in">
-  <strong>armedforcesgear.com · misma web, mejor acomodada (simulación)</strong>
+  <strong>armedforcesgear.com · home con fotos congruentes (simulación)</strong>
   <div class="ctl-g">
     <div class="seg" role="group" aria-label="Momento de la temporada">
       <button type="button" data-set="bogo" aria-pressed="true">Hoy (BOGO)</button>
@@ -212,60 +259,42 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </header>
 
   <!-- HERO -->
-  <section class="hero" data-st="bogo" data-note="HERO = el banner real de BOGO que ya tienen (foto y texto integrados). Desktop 2400×667, celular 1200×1354. Ya no hay 2 hero más debajo.">
-    <img class="d" src="img/live/prebf_d.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26">
-    <img class="m" src="img/live/prebf_m.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26">
-  </section>
-  <section class="hero-ov" data-st="bf" data-note="BLACK FRIDAY: mismo lugar, foto real del sitio con el texto encima y un degradado suave, del lado libre de la foto. Sin franjas.">
-    <img src="img/live/ua.jpg" alt="Hombre corriendo en un camino de otoño con quarter zip de Army" style="object-position:center 45%">
-    <div class="ov"><span class="k">Black Friday</span><h1>20% off<br>every branch</h1><p>The Everyday Collection, through Sunday.</p><span class="code">Code BF2026</span><a class="btn w">Shop Black Friday</a></div>
-  </section>
-  <section class="gdh" data-st="gd" data-note="GAME DAY: los 2 banners reales de Rivalry como hero, lado a lado (cada lado separado). Sin texto encima de la gente.">
-    <a><img src="img/live/navyriv_m.jpg" alt="2026 Navy Rivalry Collection"></a><a><img src="img/live/armyriv_m.jpg" alt="2026 Army Rivalry Collection"></a>
-  </section>
-
-  <!-- ARMY VS NAVY -->
-  <section class="sec" data-st="bogo bf" data-note="ARMY VS NAVY: los 2 banners reales (antes eran 2 banners de pantalla completa, uno debajo del otro) ahora lado a lado, cada uno con sus 4 productos reales abajo. Lo mismo, en la mitad del espacio.">
-    <div class="wrap">
-      <div class="sh"><h2 class="h2">2026 Army vs. Navy Rivalry</h2><span class="va">Game day Dec 12</span></div>
-      <div class="avn">
-        <div class="side"><a><img class="d" src="img/live/navyriv_m.jpg" alt="2026 Navy Rivalry Collection"><img class="m" src="img/live/navyriv_m.jpg" alt="2026 Navy Rivalry Collection"></a><div class="mini"><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-mens-football-repli.jpg" alt="Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)</p><p class="pp">$120.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-hood-dig.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)</p><p class="pp">$112.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-fleece-f.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)</p><p class="pp">$115.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-playoff-quarter-zip.jpg" alt="Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)</p><p class="pp">$105.00</p></a></div></div>
-        <div class="side"><a><img class="d" src="img/live/armyriv_m.jpg" alt="2026 Army Rivalry Collection"><img class="m" src="img/live/armyriv_m.jpg" alt="2026 Army Rivalry Collection"></a><div class="mini"><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-american-flag-club-fleece-h.jpg" alt="Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)</p><p class="pp">$105.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-beat-navy-club-fleece-crewn.jpg" alt="Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)</p><p class="pp">$100.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-club-fleece-1-2-top-black.jpg" alt="Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)</p><p class="pp">$90.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-west-point-club-fleece-hood.jpg" alt="Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)</p><p class="pp">$95.00</p></a></div></div>
-      </div>
-    </div>
+  <section class="hero8" data-note="HERO: foto nueva de Marpipe con el casting (4 ramas, mismo estudio). El texto va en el espacio libre de la foto: se entiende en 2 segundos. Solo cambia el texto por fecha, la foto se queda.">
+    <img src="img/v8/hero.jpg" alt="Cuatro amigos con sudaderas AFG de Navy y Army en un estudio beige">
+    <div class="tx" data-st="bogo"><span class="k">Gifts for everyone on your list</span><h1>Buy one,<br>get one<br>50% off</h1><p>Select styles, every branch. Through Sunday.</p><span class="code">Code BOGONO26</span><div class="b"><a class="btn">Shop the sale</a></div></div>
+    <div class="tx" data-st="bf"><span class="k">Black Friday</span><h1>20% off<br>every<br>branch</h1><p>The Everyday Collection. Through Sunday.</p><span class="code">Code BF2026</span><div class="b"><a class="btn">Shop Black Friday</a></div></div>
+    <div class="tx" data-st="gd"><span class="k">Saturday, December 12</span><h1>Army<br>vs. Navy</h1><p>Pick your side.</p><div class="b"><a class="btn">Shop Navy</a><a class="btn">Shop Army</a></div></div>
   </section>
 
   <!-- RAMAS -->
-  <section class="sec" data-note="SHOP BY BRANCH sube (antes estaba casi al final). Usa las mismas fotos del sitio; se agrega Space Force.">
+  <section class="sec" data-note="SHOP BY BRANCH: 6 fotos nuevas, mismo estudio, mismo encuadre (barbilla a cintura): el producto es el protagonista.">
     <div class="wrap">
       <div class="sh"><h2 class="h2">Shop by Branch</h2></div>
-      <div class="brs"><a class="bt"><img src="img/live/armynewhptest.png" alt="Army" style="object-position:center 50%" loading="lazy"><span class="lbl">Shop Army</span></a><a class="bt"><img src="img/live/marnewhptest.png" alt="Marine Corps" style="object-position:center 50%" loading="lazy"><span class="lbl">Shop Marine Corps</span></a><a class="bt"><img src="img/live/navynewhptest.png" alt="Navy" style="object-position:60% 50%" loading="lazy"><span class="lbl">Shop Navy</span></a><a class="bt"><img src="img/live/afnewhptest.png" alt="Air Force" style="object-position:center 50%" loading="lazy"><span class="lbl">Shop Air Force</span></a><a class="bt"><img src="img/live/cgnewblockhp.jpg" alt="Coast Guard" style="object-position:62% 50%" loading="lazy"><span class="lbl">Shop Coast Guard</span></a><a class="bt"><img src="img/m_sf.jpg" alt="Space Force" style="object-position:center 20%" loading="lazy"><span class="lbl">Shop Space Force</span></a></div>
+      <div class="brs8"><a><div class="im"><img src="img/v8/army.jpg" alt="Army" loading="lazy"></div><span class="l">Shop Army</span></a><a><div class="im"><img src="img/v8/marines.jpg" alt="Marines" loading="lazy"></div><span class="l">Shop Marines</span></a><a><div class="im"><img src="img/v8/navy.jpg" alt="Navy" loading="lazy"></div><span class="l">Shop Navy</span></a><a><div class="im"><img src="img/v8/airforce.jpg" alt="Air Force" loading="lazy"></div><span class="l">Shop Air Force</span></a><a><div class="im"><img src="img/v8/cg.jpg" alt="Coast Guard" loading="lazy"></div><span class="l">Shop Coast Guard</span></a><a><div class="im"><img src="img/v8/sf.jpg" alt="Space Force" loading="lazy"></div><span class="l">Shop Space Force</span></a></div>
     </div>
   </section>
 
   <!-- BEST SELLERS -->
-  <section class="sec" data-note="BEST SELLERS reales (colección automática de 60 días) en vez de New Arrivals, que convierte 0.79%. Mismo diseño de tarjeta del sitio.">
+  <section class="sec" data-note="BEST SELLERS reales, con flechas, la siguiente tarjeta asomándose y barra de avance para que se note que se desliza. (colección automática de 60 días) en vez de New Arrivals, que convierte 0.79%. Mismo diseño de tarjeta del sitio.">
     <div class="wrap">
-      <div class="sh"><h2 class="h2">Best Sellers</h2><div class="arrows"><button type="button" class="js-l" aria-label="Anterior">‹</button><button type="button" class="js-r" aria-label="Siguiente">›</button></div></div>
-      <div class="rail" id="rail"><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-grey.jpg" alt="Army Logo Core T-Shirt (Grey)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-pt-t-shirt-grey.jpg" alt="Air Force PT T-Shirt (Grey)" loading="lazy"></div><p class="pt">Air Force PT T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-od-green.jpg" alt="Army Logo Core T-Shirt (OD Green)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (OD Green)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-wings-belmont-polo-charcoal.jpg" alt="Air Force Wings Belmont Polo" loading="lazy"></div><p class="pt">Air Force Wings Belmont Polo</p><p class="pp"><span data-st="bogo gd">$42.00</span><span data-st="bf"><s>$42.00</s> <b class="now">$33.60</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/marines-ega-pack-n-go-pullover.jpg" alt="Marines EGA Pack-N-Go Pullover" loading="lazy"></div><p class="pt">Marines EGA Pack-N-Go Pullover</p><p class="pp"><span data-st="bogo gd">$46.00</span><span data-st="bf"><s>$46.00</s> <b class="now">$36.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-t-shirt-.jpg" alt="Air Force Distressed Block Comfort Colors T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/navy-low-profile-arch-hat.jpg" alt="Navy Low Profile Arch Hat (Navy)" loading="lazy"></div><p class="pt">Navy Low Profile Arch Hat (Navy)</p><p class="pp"><span data-st="bogo gd">$26.00</span><span data-st="bf"><s>$26.00</s> <b class="now">$20.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-long-sle.jpg" alt="Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$30.00</span><span data-st="bf"><s>$30.00</s> <b class="now">$24.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/u-s-navy-flag-icon-forged-by-the-sea-t-shirt-grey.jpg" alt="U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)" loading="lazy"></div><p class="pt">U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$23.00</span><span data-st="bf"><s>$23.00</s> <b class="now">$18.40</b></span></p></a></div>
+      <div class="sh"><h2 class="h2">Best Sellers <span class="hint">· Swipe →</span></h2><div class="arrows"><button type="button" class="js-l" aria-label="Anterior">‹</button><button type="button" class="js-r" aria-label="Siguiente">›</button></div></div>
+      <div class="railwrap"><div class="rail" id="rail"><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-grey.jpg" alt="Army Logo Core T-Shirt (Grey)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-pt-t-shirt-grey.jpg" alt="Air Force PT T-Shirt (Grey)" loading="lazy"></div><p class="pt">Air Force PT T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-od-green.jpg" alt="Army Logo Core T-Shirt (OD Green)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (OD Green)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-wings-belmont-polo-charcoal.jpg" alt="Air Force Wings Belmont Polo" loading="lazy"></div><p class="pt">Air Force Wings Belmont Polo</p><p class="pp"><span data-st="bogo gd">$42.00</span><span data-st="bf"><s>$42.00</s> <b class="now">$33.60</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/marines-ega-pack-n-go-pullover.jpg" alt="Marines EGA Pack-N-Go Pullover" loading="lazy"></div><p class="pt">Marines EGA Pack-N-Go Pullover</p><p class="pp"><span data-st="bogo gd">$46.00</span><span data-st="bf"><s>$46.00</s> <b class="now">$36.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-t-shirt-.jpg" alt="Air Force Distressed Block Comfort Colors T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/navy-low-profile-arch-hat.jpg" alt="Navy Low Profile Arch Hat (Navy)" loading="lazy"></div><p class="pt">Navy Low Profile Arch Hat (Navy)</p><p class="pp"><span data-st="bogo gd">$26.00</span><span data-st="bf"><s>$26.00</s> <b class="now">$20.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-long-sle.jpg" alt="Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$30.00</span><span data-st="bf"><s>$30.00</s> <b class="now">$24.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/u-s-navy-flag-icon-forged-by-the-sea-t-shirt-grey.jpg" alt="U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)" loading="lazy"></div><p class="pt">U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$23.00</span><span data-st="bf"><s>$23.00</s> <b class="now">$18.40</b></span></p></a></div></div><div class="bar"><i id="barI"></i></div>
     </div>
   </section>
 
-  <!-- VETERAN + FAMILY -->
-  <section class="sec" data-note="Antes eran 2 banners de pantalla completa (Veteran y Family) separados por 6 secciones. Ahora juntos, lado a lado, foto real con el texto encima.">
+
+
+
+
+
+  <!-- ARMY VS NAVY -->
+  <section class="sec" data-note="ARMY VS NAVY: dos fotos de la campaña Rivalry que ya hicimos, mismo estadio, mismo encuadre. Cada lado separado.">
     <div class="wrap">
-      <div class="pair">
-        <a class="ed"><img src="img/live/veteran.jpg" alt="Veteranos de Coast Guard y Navy en un muelle"><span class="cap"><h3>Different branches.<br>One shared legacy.</h3><p>Veteran apparel and gear made to honor where you served.</p><span class="btn w">Shop Veteran</span></span></a>
-        <a class="ed"><img src="img/live/family.jpg" alt="Familia con sudaderas Navy" style="object-position:center 30%"><span class="cap"><h3>Military pride<br>across generations</h3><p>Gifts and apparel for the whole family.</p><span class="btn w">Shop Family</span></span></a>
+      <div class="sh"><h2 class="h2">2026 Army vs. Navy Rivalry</h2><span class="va">Game day Dec 12</span></div>
+      <div class="avn8">
+        <a><img src="img/v8/avn_navy.jpg" alt="Fan de Navy con hoodie digi camo en el estadio"><span class="cap"><b>Navy</b><span class="btn w">Shop Navy</span></span></a>
+        <a><img src="img/v8/avn_army.jpg" alt="Fan de Army con crewneck Beat Navy en el estadio"><span class="cap"><b>Army</b><span class="btn w">Shop Army</span></span></a>
       </div>
-    </div>
-  </section>
-
-  <!-- REGALOS -->
-  <section class="sec" data-note="REGALOS: la foto real del sitio (Sweatshirt Season) con el texto encima, del lado libre de la foto. Junta en un solo bloque lo que hoy son 4: Thoughtful gifts, ornamentos, gift card y la taza.">
-    <div class="gift">
-      <img src="img/live/sweat.jpg" alt="Sudaderas AFG dobladas en un porche de otoño">
-      <div class="ov"><span class="k">Gift Guide</span><h2>Gifts for everyone<br>on your list</h2><div class="chips"><a class="btn w">Under $30</a><a class="btn w">Ornaments</a><a class="btn w">Gift cards</a></div></div>
     </div>
   </section>
 
@@ -314,6 +343,7 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   function step(dir){var c=rail.querySelector('.pc');rail.scrollBy({left:dir*(c?c.getBoundingClientRect().width+16:300),behavior:'smooth'});}
   document.querySelector('.js-l').addEventListener('click',function(){step(-1)});
   document.querySelector('.js-r').addEventListener('click',function(){step(1)});
+  var bi=document.getElementById('barI');function upd(){var m=rail.scrollWidth-rail.clientWidth;var f=rail.clientWidth/rail.scrollWidth;bi.style.width=(f*100)+'%';bi.style.left=(m>0?rail.scrollLeft/m*(100-f*100):0)+'%';}rail.addEventListener('scroll',upd);window.addEventListener('resize',upd);setTimeout(upd,300);
 })();
 </script>
 </html>
