@@ -19,7 +19,7 @@
   --frame:#ebe7df; --frame-fg:#111820; --frame-line:#d3cdc1; --chip:#fff;
   --t1:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --t2:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --h-hero:64px; --h-sec:28px; --gap:72px; --pad:40px;
+  --h-hero:64px; --h-sec:28px; --gap:52px; --pad:40px;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--frame:#0b1520;--frame-fg:#eef1f4;--frame-line:#22364a;--chip:#13263a;color-scheme:dark}}
 :root[data-theme="dark"]{--frame:#0b1520;--frame-fg:#eef1f4;--frame-line:#22364a;--chip:#13263a;color-scheme:dark}
@@ -98,10 +98,37 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .s .strip.big .wrap{padding-top:38px;padding-bottom:38px}
 .s .strip.big .t1{font-size:48px}
 
-/* regalos: atajos chicos, sin banner */
+/* franja con foto: texto a la izquierda, foto de campaña a la derecha */
+.s .strip.ph{display:grid;grid-template-columns:1fr minmax(0,38%);align-items:stretch}
+.s .strip.ph .wrap{width:100%;max-width:none;margin:0}
+.s .strip.ph img{width:100%;height:100%;min-height:150px;max-height:200px;object-fit:cover;object-position:center 30%}
+.s .strip.ph.big img{min-height:260px;max-height:300px}
+
+/* regalos: atajos chicos con foto */
 .s .gifts{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
-.s .gifts a{background:var(--beige);padding:26px 18px;display:grid;gap:4px}
-.s .gifts .t1{font-size:22px}
+.s .gifts a{display:grid;gap:8px;align-content:start}
+.s .gifts .im{aspect-ratio:1/1;overflow:hidden;background:var(--beige)}
+.s .gifts img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.s .gifts a:hover img{transform:scale(1.03)}
+.s .gifts .t1{font-size:20px}
+
+/* mosaico editorial: 1 grande + 2 chicas */
+.s .mosaic{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:3px;height:min(68vw,720px)}
+.s .mosaic a{position:relative;overflow:hidden}
+.s .mosaic a:first-child{grid-row:1/3}
+.s .mosaic img{width:100%;height:100%;object-fit:cover}
+.s .mosaic a::after,.s .band a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(11,31,51,.72))}
+.s .mosaic .cap{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;color:#fff;display:grid;gap:6px}
+.s .mosaic .cap .t1{color:#fff;font-size:var(--h-sec)}
+.s .mosaic .cap .t2{color:#e7ebef}
+
+/* banner de campaña a todo lo ancho (Homecoming) */
+.s .band a{position:relative;display:block;overflow:hidden}
+.s .band img{width:100%;height:min(52vw,620px);object-fit:cover;object-position:center 40%}
+.s .band .cap{position:absolute;z-index:2;right:max(var(--pad),calc((100% - 1400px)/2 + var(--pad)));bottom:34px;max-width:440px;color:#fff;display:grid;gap:10px;justify-items:end;text-align:right}
+.s .band .t1{color:#fff;font-size:var(--h-hero)}
+.s .band .t2{color:#e7ebef}
+.s .band .btn{background:#fff;color:var(--ink)}
 .s .hero-tx{padding:34px var(--pad) 0;max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
 .s .hero-tx .c{display:grid;gap:10px}
 .s .hero-tx .b{display:flex;gap:10px;flex-wrap:wrap}
@@ -181,9 +208,26 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   .s .strip .btn{flex:1;text-align:center}
   .s .strip.big .wrap{padding-top:24px;padding-bottom:24px}
   .s .strip.big .t1{font-size:32px}
-  .s .gifts{grid-template-columns:1fr 1fr}
-  .s .gifts a{padding:18px 14px}
-  .s .gifts .t1{font-size:18px}
+  .s .gifts{grid-template-columns:1fr 1fr;row-gap:16px}
+  .s .gifts .t1{font-size:17px}
+  .s .strip.ph{grid-template-columns:1fr 36%}
+  .s .strip.ph img{min-height:0;max-height:none;height:100%}
+  .s .strip.ph.big img{min-height:0}
+  .s .strip.ph .wrap{padding-left:var(--pad);padding-right:12px}
+  .s .strip.ph .t1{font-size:21px}
+  .s .strip.ph.big .t1{font-size:28px}
+  .s .strip .tag{display:table;margin:2px 0 4px}
+  .s .mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto auto;height:auto}
+  .s .mosaic a:first-child{grid-row:auto;grid-column:1/3;aspect-ratio:4/5}
+  .s .mosaic a:not(:first-child){aspect-ratio:4/5}
+  .s .mosaic .cap{left:14px;right:14px;bottom:14px}
+  .s .mosaic a:not(:first-child) .cap .t2{display:none}
+  .s .mosaic a:not(:first-child) .cap .t1{font-size:17px}
+  .s .band img{height:auto;aspect-ratio:4/5}
+  .s .band a{background:var(--navy)}
+  .s .band a::after{display:none}
+  .s .band .cap{position:static;max-width:none;justify-items:start;text-align:left;padding:20px 16px 24px}
+  .s .band .t1{font-size:34px}
   .s .camp .t1{left:12px;bottom:12px}
   .s .foot .wrap{flex-direction:column;padding-top:22px;padding-bottom:22px}
   .s .foot .ph{display:none}
@@ -231,14 +275,17 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </section>
 
   <!-- FRANJA DE PROMO (lo único que cambia por fecha) -->
-  <section class="strip" data-st="bogo" data-note="FRANJA DELGADA: aquí vive el descuento de la semana, no en un banner gigante. Desktop 2880×600 / celular 1080×540 si se hace como imagen; mejor como texto (sección Rich text o Image with text del tema).">
+  <section class="strip ph" data-st="bogo" data-note="FRANJA DELGADA CON FOTO: el descuento de la semana vive aquí, no en un banner gigante. Sección Image with text del tema (texto + 1 foto). Foto: 1200×600.">
     <div class="wrap"><div class="c"><p class="t1">Buy one, get one 50% off</p><p class="t2"><span class="tag">Ends Sunday</span>The AFG Collection. Code <b>BOGONO26</b></p></div><div class="b"><a class="btn">Shop the sale</a></div></div>
+    <img src="img/e_bones.jpg" alt="Hombre con la hoodie Navy Fear the Bones">
   </section>
-  <section class="strip big" data-st="bf" data-note="BLACK FRIDAY: la misma franja al doble de alto (26–30 nov). Es la semana en que la gente entra buscando el descuento.">
+  <section class="strip ph big" data-st="bf" data-note="BLACK FRIDAY: la misma franja al doble de alto (26–30 nov), con la foto de las 5 ramas.">
     <div class="wrap"><div class="c"><p class="t1">Black Friday, 20% off</p><p class="t2"><span class="tag">Through Sunday</span>The Everyday Collection, every branch. Code <b>BF2026</b></p></div><div class="b"><a class="btn">Shop Black Friday</a></div></div>
+    <img src="img/e_stack.jpg" alt="Hoodies de Army, Navy, USMC, Coast Guard y Air Force apiladas">
   </section>
-  <section class="strip" data-st="gd" data-note="GAME DAY: misma franja, dos botones (cada lado por separado).">
+  <section class="strip ph" data-st="gd" data-note="GAME DAY: misma franja, dos botones (cada lado por separado).">
     <div class="wrap"><div class="c"><p class="t1">Army vs. Navy</p><p class="t2">Game day is Saturday, December 12.</p></div><div class="b"><a class="btn">Shop Navy</a><a class="btn">Shop Army</a></div></div>
+    <img src="img/e_avn.jpg" alt="Fans de Army y Navy en el estadio">
   </section>
 
   <!-- RAMAS -->
@@ -272,6 +319,18 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
     </div>
   </section>
 
+  <!-- MOSAICO EDITORIAL -->
+  <section class="sec" data-note="MOSAICO DE CAMPAÑA (fotos Marpipe): 1 grande + 2 chicas. Da vida a la página y vende el 'para toda la familia'. Cada foto lleva a una colección.">
+    <div class="wrap">
+      <div class="sh"><h2 class="t1 sec">Made for the whole family</h2><a class="more">Shop all</a></div>
+      <div class="mosaic">
+        <a><img src="img/e_familia.jpg" alt="Familia en el porche con sudaderas de Air Force, Navy y Army"><span class="cap"><span class="t1">Every branch, one family</span><span class="t2">Sweatshirts for mom, dad and the kids.</span></span></a>
+        <a><img src="img/e_tailgate.jpg" alt="Amigos en un tailgate con hoodie Army"><span class="cap"><span class="t1">Game day</span></span></a>
+        <a><img src="img/e_diner.jpg" alt="Dos amigas afuera de un diner con sudaderas AFG"><span class="cap"><span class="t1">Everyday</span></span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ARMY VS NAVY -->
   <section class="sec" data-note="Hasta el 12 de diciembre. Banner MEDIANO (antes era de pantalla completa): dos fotos cuadradas, cada lado separado; toda la foto es el botón.">
     <div class="wrap">
@@ -284,16 +343,21 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </section>
 
   <!-- REGALOS -->
-  <section class="sec" data-note="Atajos chicos de regalo en vez de banners completos (Thoughtful gifts, A smarter way… se quitan). Cada cuadro lleva a una colección.">
+  <section class="sec" data-note="Atajos de regalo con foto, en vez de banners completos (Thoughtful gifts, A smarter way… se quitan). Cada cuadro lleva a una colección.">
     <div class="wrap">
-      <div class="sh"><h2 class="t1 sec">Gifts</h2></div>
+      <div class="sh"><h2 class="t1 sec">Gifts</h2><a class="more">All gifts</a></div>
       <div class="gifts">
-        <a><span class="t1">Under $30</span><span class="t2">Tees and hats</span></a>
-        <a><span class="t1">For Mom</span><span class="t2">Military mom gear</span></a>
-        <a><span class="t1">For Dad</span><span class="t2">Veteran and dad gear</span></a>
-        <a><span class="t1">Gift cards</span><span class="t2">Let them choose</span></a>
+        <a><div class="im"><img src="img/e_tees.jpg" alt="Hombre cargando playeras dobladas de Navy"></div><span class="t1">Under $30</span></a>
+        <a><div class="im"><img src="img/e_mom.jpg" alt="Dos mujeres en un porche con sudaderas AFG"></div><span class="t1">For Mom</span></a>
+        <a><div class="im"><img src="img/e_dad.jpg" alt="Hombre mayor con hoodie de Army"></div><span class="t1">For Dad</span></a>
+        <a><div class="im"><img src="img/e_vetcap.jpg" alt="Gorra Veteran con moño rojo de regalo"></div><span class="t1">For Veterans</span></a>
       </div>
     </div>
+  </section>
+
+  <!-- BANNER HOMECOMING -->
+  <section class="sec band" data-note="UN banner emocional a todo lo ancho (campaña Homecoming). Cierra la página con orgullo antes del email.">
+    <a><img src="img/e_homecoming.jpg" alt="Veterano y su hijo frente a una casa con su perro"><span class="cap"><span class="t1">Welcome home</span><span class="t2">Gear made for the ones who served, and the ones who waited.</span><span class="btn">Shop Veteran</span></span></a>
   </section>
 
   <section class="mail" data-note="PERMANENTE.">
