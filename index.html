@@ -7,312 +7,193 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Cormorant:wght@600&family=Poppins:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Cormorant:wght@600&family=Roboto:wght@400;500;700&display=swap">
 <style>
-/* Layout: barra de control fija arriba + réplica navegable de armedforcesgear.com con las mejoras.
-   La tienda simulada siempre va en claro (es la tienda real); el marco de alrededor sigue el tema del visor. */
+/* Layout: tienda minimalista tipo catálogo. Fotos de estudio en un solo beige, muy poco texto, una campaña en contexto.
+   El marco de control sigue el tema del visor; la tienda va siempre en claro. */
 :root{
-  --navy:#0B1F33; --bone:#F2EFE8; --white:#FAF9F5; --ink:#111820; --red:#A23B35;
-  --frame:#e6e1d6; --frame-fg:#0B1F33; --frame-muted:#5d6670; --frame-line:#cfc8ba; --chip:#FAF9F5;
+  --navy:#0B1F33; --beige:#ECE6DC; --ink:#111820; --red:#A23B35; --grey:#6b737b; --line:#e6e1d7;
+  --frame:#ebe7df; --frame-fg:#111820; --frame-line:#d3cdc1; --chip:#fff;
   --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
   --serif:"Cormorant",Georgia,serif;
-  --body:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ui:"Roboto",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--frame:#08131f;--frame-fg:#F2EFE8;--frame-muted:#9aa6b2;--frame-line:#21374d;--chip:#11263b;color-scheme:dark}}
-:root[data-theme="dark"]{--frame:#08131f;--frame-fg:#F2EFE8;--frame-muted:#9aa6b2;--frame-line:#21374d;--chip:#11263b;color-scheme:dark}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--frame:#0b1520;--frame-fg:#eef1f4;--frame-line:#22364a;--chip:#13263a;color-scheme:dark}}
+:root[data-theme="dark"]{--frame:#0b1520;--frame-fg:#eef1f4;--frame-line:#22364a;--chip:#13263a;color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--frame);color:var(--frame-fg);font-family:var(--body);font-size:14px;margin:0}
+body{background:var(--frame);color:var(--frame-fg);font-family:var(--ui);font-size:14px;margin:0}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--frame)}
 
-/* ---------- control bar ---------- */
 .ctl{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--frame);border-bottom:1px solid var(--frame-line);
-  padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.ctl-in{max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
-.ctl h1{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase;margin:0;line-height:1.1}
-.ctl h1 span{font-weight:500;color:var(--frame-muted)}
-.ctl-g{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
-.lbl{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--frame-muted)}
-.seg{display:inline-flex;border:1.5px solid var(--frame-fg);background:var(--chip)}
-.seg button{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;background:transparent;color:var(--frame-fg);border:0;padding:6px 12px;cursor:pointer;white-space:nowrap}
+  padding-block:9px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.ctl-in{max-width:1440px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.ctl strong{font-size:14px;font-weight:500}
+.ctl-g{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--frame-line);background:var(--chip);border-radius:6px;overflow:hidden}
+.seg button,.tog{font-family:var(--ui);font-size:13px;background:transparent;color:var(--frame-fg);border:0;padding:7px 12px;cursor:pointer;white-space:nowrap}
 .seg button[aria-pressed="true"]{background:var(--frame-fg);color:var(--frame)}
-.seg button:focus-visible,.tog:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.tog{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.05em;text-transform:uppercase;border:1.5px solid var(--frame-fg);background:var(--chip);color:var(--frame-fg);padding:6px 12px;cursor:pointer}
-.tog[aria-pressed="true"]{background:#ffd84a;color:#111;border-color:#111}
+.tog{border:1px solid var(--frame-line);background:var(--chip);border-radius:6px}
+.tog[aria-pressed="true"]{background:#ffd84a;color:#111;border-color:#c9a800}
+.seg button:focus-visible,.tog:focus-visible{outline:2px solid #ffb700;outline-offset:2px}
 
-.stage{padding-block:20px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:center}
-.device{width:100%;max-width:1440px;background:#fff;box-shadow:0 14px 50px rgba(11,31,51,.22);container-type:inline-size;container-name:site;transition:max-width .35s ease;overflow:hidden}
-.stage.phone .device{max-width:390px;border-radius:28px;border:10px solid #111820}
+.stage{padding-block:18px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;justify-content:center}
+.device{width:100%;max-width:1440px;background:#fff;box-shadow:0 10px 40px rgba(11,31,51,.18);container-type:inline-size;container-name:site;transition:max-width .35s ease;overflow:hidden}
+.stage.phone .device{max-width:390px;border-radius:30px;border:10px solid #111820}
 @media (prefers-reduced-motion: reduce){.device{transition:none}}
 
-/* ================= SIMULATED STORE (always light) ================= */
-.s{color:#111820;font-family:var(--body);font-size:14px;line-height:1.45;background:#fff}
+/* ================= TIENDA ================= */
+.s{color:var(--ink);font-family:var(--ui);font-size:14px;line-height:1.5;background:#fff}
 .s *{box-sizing:border-box}
 .s a{color:inherit;text-decoration:none;cursor:pointer}
 .s img{display:block;max-width:100%}
 .s.bogo [data-st]:not([data-st~="bogo"]),.s.bf [data-st]:not([data-st~="bf"]),.s.gd [data-st]:not([data-st~="gd"]){display:none!important}
-.s .wrap{max-width:1360px;margin:0 auto;padding:0 32px}
+.s .wrap{max-width:1400px;margin:0 auto;padding:0 40px}
 
-/* notes */
 .s [data-note]{position:relative}
 .s.notes [data-note]{outline:2px dashed #e0b400;outline-offset:-2px}
-.s.notes [data-note]::before{content:attr(data-note);position:absolute;z-index:20;top:10px;left:10px;max-width:min(360px,80%);
-  background:#ffd84a;color:#111;font-family:var(--body);font-size:12px;line-height:1.35;font-weight:500;padding:7px 10px;box-shadow:0 3px 10px rgba(0,0,0,.25);text-transform:none;letter-spacing:0;text-align:left}
+.s.notes [data-note]::before{content:attr(data-note);position:absolute;z-index:30;top:10px;right:10px;max-width:min(330px,85%);
+  background:#ffd84a;color:#111;font-family:var(--ui);font-size:12.5px;line-height:1.4;padding:8px 11px;border-radius:4px;box-shadow:0 3px 12px rgba(0,0,0,.25)}
 
-/* announcement */
-.s .ann{background:var(--navy);color:var(--bone);text-align:center;font-size:12.5px;letter-spacing:.04em;padding:10px 16px}
-.s .ann b{font-weight:600}
-.s .ann .red{color:#e9a7a1}
-
-/* header */
-.s .hdr{background:#fff;border-bottom:1px solid #e7e2d8}
-.s .hdr-top{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:16px 32px 10px;max-width:1360px;margin:0 auto}
-.s .hdr .logo img{height:44px;width:auto}
-.s .search{display:flex;border:1.5px solid #111820;max-width:520px;justify-self:end;width:100%}
-.s .search span{flex:1;padding:10px 14px;color:#7a828b;font-size:13px}
-.s .search b{background:#111820;width:46px;display:grid;place-items:center}
-.s .ico{display:flex;gap:18px;align-items:center}
-.s .ico svg{width:24px;height:24px;stroke:#0B1F33;fill:none;stroke-width:1.8}
-.s .cartn{position:relative}
-.s .cartn i{position:absolute;top:-6px;right:-8px;background:var(--red);color:#fff;font-style:normal;font-size:10px;font-weight:600;border-radius:9px;min-width:17px;height:17px;display:grid;place-items:center}
-.s .nav{display:flex;justify-content:center;gap:26px;padding:6px 32px 14px;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy);flex-wrap:wrap}
+/* barra y header */
+.s .ann{background:var(--navy);color:#fff;text-align:center;font-size:12.5px;padding:10px 16px}
+.s .hdr{background:#fff}
+.s .hdr .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding-top:18px;padding-bottom:14px}
+.s .hdr .l,.s .hdr .r{display:flex;gap:22px;align-items:center;font-size:13px}
+.s .hdr .r{justify-content:flex-end}
+.s .logo img{height:46px;width:auto}
+.s .ic{width:22px;height:22px;stroke:#111820;fill:none;stroke-width:1.7}
+.s .cart{position:relative;display:flex}
+.s .cart i{position:absolute;top:-6px;right:-8px;background:var(--red);color:#fff;font-style:normal;font-size:10px;font-weight:700;border-radius:9px;min-width:17px;height:17px;display:grid;place-items:center}
+.s .nav{display:flex;justify-content:center;gap:30px;padding:0 40px 16px;font-size:13px;font-weight:500;letter-spacing:.6px;text-transform:uppercase;flex-wrap:wrap}
 .s .nav .sale{color:var(--red)}
 .s .burger{display:none}
 
-/* buttons */
-.s .btn{display:inline-block;font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.09em;text-transform:uppercase;padding:14px 26px;background:var(--navy);color:var(--white);line-height:1}
-.s .btn.light{background:var(--white);color:var(--navy)}
-.s .btn.line{background:transparent;color:var(--navy);box-shadow:inset 0 0 0 1.5px var(--navy)}
-.s .btn.line.w{color:var(--white);box-shadow:inset 0 0 0 1.5px var(--white)}
-.s .fine{font-size:11px;color:#5b636c}
+/* HERO */
+.s .hero{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--beige)}
+.s .hero .im{aspect-ratio:4/5;max-height:860px;overflow:hidden}
+.s .hero .im img{width:100%;height:100%;object-fit:cover}
+.s .hero .tx{position:absolute;left:0;right:0;bottom:44px;text-align:center;display:grid;gap:14px;justify-items:center;color:var(--navy);pointer-events:none}
+.s .hero .tx a{pointer-events:auto}
+.s .hero h1{font-family:var(--display);font-weight:700;font-size:clamp(46px,5.4cqw,80px);line-height:.9;text-transform:uppercase;margin:0}
+.s .hero .sm{font-size:14px}
+.s .lnk{font-size:13px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;border-bottom:1.5px solid currentColor;padding-bottom:3px}
+.s .hero.dark{background:#0B1F33;gap:3px}
+.s .hero.dark .im{position:relative}
+.s .hero.dark .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(11,31,51,.8))}
+.s .hero.dark .tx{color:#fff;z-index:2}
+.s .hero.dark .side{position:absolute;bottom:40px;z-index:2;color:#fff;font-family:var(--display);font-weight:700;font-size:clamp(40px,4.4cqw,64px);line-height:1;text-transform:uppercase}
 
-/* HERO: BOGO */
-.s .h-bogo{display:grid;grid-template-columns:1fr 1.05fr;background:#e9e6e0;min-height:600px}
-.s .h-copy{padding:56px 56px 48px max(32px,calc((100cqw - 1360px)/2 + 32px));display:grid;align-content:center;gap:18px;background:var(--bone)}
-.s .kick{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;color:var(--navy)}
-.s .h1{font-family:var(--display);font-weight:700;font-size:88px;line-height:.9;color:var(--navy);text-transform:uppercase;margin:0}
-.s .h1 em{font-style:normal;box-shadow:inset 0 -8px 0 var(--red)}
-.s .sub{font-size:15px;max-width:40ch;color:#111820}
-.s .sub b{font-weight:600}
-.s .ctas{display:flex;gap:10px;flex-wrap:wrap}
-.s .code{display:inline-flex;align-items:center;gap:10px;font-size:12px;color:#5b636c}
-.s .code b{font-family:var(--display);font-size:20px;letter-spacing:.12em;color:var(--navy);border:1.5px dashed var(--navy);padding:4px 10px}
-.s .h-photo{position:relative;overflow:hidden}
-.s .h-photo img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
-.s .ptag{position:absolute;left:18px;bottom:18px;background:rgba(250,249,245,.94);padding:9px 12px;display:grid;gap:1px;font-size:12px;box-shadow:0 2px 10px rgba(0,0,0,.08)}
-.s .ptag b{font-weight:600;font-size:12.5px;color:var(--navy)}
-.s .ptag span{color:var(--red);font-weight:600}
+/* línea de confianza */
+.s .trust{display:flex;justify-content:center;gap:40px;padding:16px 20px;font-size:12.5px;color:var(--grey);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.s .trust b{color:var(--ink);font-weight:500}
 
-/* HERO: BF */
-.s .h-bf{display:grid;grid-template-columns:.9fr 1.1fr;background:var(--bone);min-height:600px}
-.s .h-bf .h-copy{background:transparent}
-.s .bfgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:40px max(32px,calc((100cqw - 1360px)/2 + 32px)) 40px 0;align-content:center}
-.s .bfi{display:grid;gap:4px;text-align:center}
-.s .bfi img{width:100%;aspect-ratio:1;object-fit:contain;mix-blend-mode:multiply}
-.s .bfi b{font-family:var(--display);font-weight:600;font-size:15px;color:var(--navy);letter-spacing:.02em;line-height:1.1}
-.s .price{font-size:13px;font-weight:600;color:var(--navy)}
-.s .price s{color:#8a9097;font-weight:400;margin-right:6px}
-.s .price .off{color:var(--red)}
+/* secciones */
+.s .sec{padding:72px 0}
+.s .sh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:22px}
+.s .sh h2{font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--navy);text-transform:uppercase;margin:0}
 
-/* HERO: Game day */
-.s .h-gd{display:grid;grid-template-columns:1fr 1fr;position:relative;min-height:640px;background:#0B1F33}
-.s .h-gd .side{position:relative;overflow:hidden;min-height:640px}
-.s .h-gd .side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%}
-.s .h-gd .side::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,31,51,.55) 0%,rgba(11,31,51,0) 28%,rgba(11,31,51,0) 55%,rgba(11,31,51,.8) 100%)}
-.s .h-gd .lab{position:absolute;z-index:2;left:0;right:0;bottom:34px;text-align:center;display:grid;gap:12px;justify-items:center;color:var(--white)}
-.s .h-gd .lab b{font-family:var(--display);font-weight:700;font-size:64px;line-height:.9;letter-spacing:.02em}
-.s .h-gd .divider{position:absolute;z-index:3;top:0;bottom:0;left:50%;border-left:3px solid var(--bone)}
-.s .h-gd .top{position:absolute;z-index:4;top:28px;left:0;right:0;text-align:center;color:var(--white);display:grid;gap:8px;justify-items:center;pointer-events:none}
-.s .h-gd .top .t{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.14em;text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.35)}
-.s .h-gd .top .t span{display:inline-block;background:var(--navy);padding:4px 14px}
-.s .cd{display:flex;gap:6px}
-.s .cd span{font-family:var(--display);font-weight:700;font-size:24px;background:rgba(11,31,51,.92);color:var(--bone);padding:6px 12px 4px;line-height:1;font-variant-numeric:tabular-nums;text-align:center;min-width:58px}
-.s .cd small{display:block;font-family:var(--body);font-size:9px;letter-spacing:.14em;font-weight:500;margin-top:3px;color:#c9d1d9}
+/* tarjetas en beige: ramas y productos comparten formato */
+.s .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.s .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.s .card{display:grid;gap:10px;align-content:start}
+.s .card .im{aspect-ratio:4/5;background:var(--beige);overflow:hidden}
+.s .card .im img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.s .card:hover .im img{transform:scale(1.03)}
+.s .card .nm{font-size:13px;line-height:1.35;padding:0 2px}
+.s .card .pr{font-size:13px;padding:0 2px;margin-top:-6px}
+.s .card .pr s{color:#959ca3;margin-right:6px}
+.s .card .pr .now{color:var(--red)}
+.s .card b.br{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.5px;text-transform:uppercase;padding:0 2px;color:var(--navy)}
 
-/* trust */
-.s .trust{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #e7e2d8;background:#fff}
-.s .trust div{padding:16px 10px;display:flex;gap:10px;align-items:center;justify-content:center;font-size:12.5px;color:#3b434c;border-right:1px solid #e7e2d8}
-.s .trust div:last-child{border-right:0}
-.s .trust b{font-family:var(--display);font-size:19px;font-weight:700;color:var(--navy);letter-spacing:.02em;white-space:nowrap}
-.s .trust .st{color:var(--red)}
+/* campaña army vs navy */
+.s .camp{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:#0B1F33}
+.s .camp a{position:relative;overflow:hidden;aspect-ratio:4/5;max-height:820px}
+.s .camp img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.s .camp a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(11,31,51,.8))}
+.s .camp span{position:absolute;z-index:2;left:0;right:0;bottom:34px;text-align:center;color:#fff;font-family:var(--display);font-weight:700;font-size:clamp(40px,4.6cqw,68px);line-height:1;text-transform:uppercase}
+.s .camp-h{text-align:center;padding:72px 20px 26px}
+.s .camp-h h2{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;color:var(--navy);text-transform:uppercase;margin:0}
+.s .camp-h p{margin:8px 0 0;color:var(--grey);font-size:14px}
 
-/* section heads */
-.s .sec{padding:56px 0}
-.s .sh{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:22px;flex-wrap:wrap}
-.s .sh h2{font-family:var(--display);font-weight:700;font-size:40px;line-height:.95;color:var(--navy);text-transform:uppercase;margin:0}
-.s .sh p{margin:6px 0 0;color:#5b636c;font-size:13.5px}
-.s .sh a.more{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--navy);border-bottom:1.5px solid var(--navy);padding-bottom:2px;white-space:nowrap}
+/* regalos: solo enlaces */
+.s .gifts{display:flex;justify-content:center;gap:12px 34px;flex-wrap:wrap;font-family:var(--display);font-weight:700;font-size:26px;text-transform:uppercase;color:var(--navy)}
+.s .gifts a{border-bottom:2px solid transparent}
+.s .gifts a:hover{border-color:var(--navy)}
+.s .gnote{text-align:center;color:var(--grey);font-size:13.5px;margin:18px 0 0}
 
-/* branches */
-.s .brs{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.s .br{background:var(--navy);color:var(--bone);aspect-ratio:1/1.05;display:grid;align-content:space-between;padding:18px 16px;transition:background .2s}
-.s .br:hover{background:#13304d}
-.s .br .star{color:#e9a7a1;font-size:14px}
-.s .br b{font-family:var(--display);font-weight:700;font-size:30px;line-height:.95;text-transform:uppercase;letter-spacing:.01em}
-.s .br small{font-size:11px;letter-spacing:.16em;color:#b9c3cd;display:flex;justify-content:space-between}
+/* historia */
+.s .story{position:relative;overflow:hidden;height:min(78cqw,760px)}
+.s .story img{width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.s .story::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(11,31,51,.75))}
+.s .story .tx{position:absolute;z-index:2;left:0;right:0;bottom:44px;text-align:center;color:#fff;display:grid;gap:14px;justify-items:center}
+.s .story h3{font-family:var(--serif);font-weight:600;font-size:clamp(38px,4.4cqw,62px);line-height:1;margin:0}
 
-/* rivalry block */
-.s .riv{display:grid;grid-template-columns:1fr 1fr;gap:28px;position:relative}
-.s .riv::before{content:"";position:absolute;top:0;bottom:0;left:50%;border-left:1px solid #cfc8ba}
-.s .rcard{position:relative;overflow:hidden;aspect-ratio:4/4.4}
-.s .rcard img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
-.s .rcard .ov{position:absolute;inset:auto 0 0 0;padding:70px 24px 24px;background:linear-gradient(transparent,rgba(11,31,51,.85));color:var(--white);display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
-.s .rcard .ov b{font-family:var(--display);font-weight:700;font-size:48px;line-height:.9;display:block}
-.s .rcard .ov span{font-size:12.5px;color:#d9dfe5}
-.s .riv-h{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+/* email y footer */
+.s .mail{text-align:center;padding:64px 20px;border-top:1px solid var(--line)}
+.s .mail h2{font-family:var(--display);font-weight:700;font-size:30px;color:var(--navy);text-transform:uppercase;margin:0}
+.s .mail p{margin:6px 0 18px;color:var(--grey);font-size:13.5px}
+.s .mail .f{display:flex;max-width:440px;margin:0 auto;border-bottom:1.5px solid var(--ink)}
+.s .mail .f span{flex:1;text-align:left;color:#8b9299;padding:10px 0;font-size:13.5px}
+.s .mail .f b{font-size:12.5px;letter-spacing:1.4px;font-weight:700;padding:10px 0}
+.s .foot{background:var(--beige);font-size:12.5px;color:#3b434c}
+.s .foot .wrap{display:flex;justify-content:space-between;gap:20px 40px;flex-wrap:wrap;padding-top:34px;padding-bottom:34px}
+.s .foot ul{list-style:none;margin:0;padding:0;display:flex;gap:10px 26px;flex-wrap:wrap}
 
-/* product cards */
-.s .pg{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.s .pc{display:grid;gap:8px;align-content:start}
-.s .pc .im{position:relative;overflow:hidden;background:#f3f1ec;aspect-ratio:4/5}
-.s .pc .im img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
-.s .pc:hover .im img{transform:scale(1.03)}
-.s .pc .im .bd{position:absolute;top:10px;left:10px;background:var(--white);color:var(--navy);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;padding:4px 8px}
-.s .pc .im .bd.r{background:var(--red);color:#fff}
-.s .pc .nm{font-size:13px;line-height:1.35;color:#111820}
-.s .pc .rt{font-size:11.5px;color:#5b636c}
-.s .pc .rt i{color:var(--red);font-style:normal;letter-spacing:1px}
-.s .pc .sw{display:flex;gap:5px}
-.s .pc .sw u{width:13px;height:13px;border-radius:50%;border:1px solid #cfc8ba;display:block}
-.s .pc.cut .im{background:#fff}
-.s .pc.cut .im img{object-fit:contain;padding:8px}
-.s .gdrow{display:grid;grid-template-columns:1fr auto 1fr;gap:22px}
-.s .gdrow .grp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.s .gdrow .vs{border-left:1px solid #cfc8ba}
-.s .gdrow h3{grid-column:1/-1;font-family:var(--display);font-weight:700;font-size:24px;color:var(--navy);margin:0;letter-spacing:.04em}
-
-/* lookbook */
-.s .look{background:var(--bone)}
-.s .lk{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*14px)/4.3);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin}
-.s .lk a{scroll-snap-align:start;position:relative;display:block}
-.s .lk img{width:100%;aspect-ratio:4/5;object-fit:cover}
-.s .lk .lt{display:flex;justify-content:space-between;gap:8px;padding-top:8px;font-size:12.5px}
-.s .lk .lt b{font-weight:500;color:#111820}
-.s .lk .lt span{font-weight:600;color:var(--navy);white-space:nowrap}
-.s .lk .dot{position:absolute;width:24px;height:24px;border-radius:50%;background:rgba(250,249,245,.95);box-shadow:0 0 0 6px rgba(250,249,245,.35);display:grid;place-items:center;font-size:14px;color:var(--navy);font-weight:600}
-
-/* gifts */
-.s .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
-.s .chips a{border:1.5px solid var(--navy);padding:8px 16px;font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--navy);background:#fff}
-.s .chips a.on{background:var(--navy);color:var(--white)}
-.s .gr{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.s .gt{position:relative;overflow:hidden;display:block}
-.s .gt img{width:100%;aspect-ratio:1;object-fit:cover}
-.s .gt .gl{position:absolute;inset:auto 0 0 0;padding:40px 14px 12px;background:linear-gradient(transparent,rgba(11,31,51,.8));color:var(--white);display:grid;gap:2px}
-.s .gt .gl b{font-family:var(--display);font-weight:700;font-size:22px;text-transform:uppercase;line-height:1}
-.s .gt .gl span{font-size:12px;color:#dfe5ea}
-.s .ship{margin-top:16px;display:flex;gap:10px;align-items:center;font-size:13px;color:#3b434c}
-.s .ship b{color:var(--navy)}
-.s .ship .dotr{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
-
-/* stories */
-.s .duo{display:grid;grid-template-columns:1fr 1fr}
-.s .story{position:relative;overflow:hidden;min-height:620px;display:grid;align-items:end}
-.s .story img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.s .story .cp{position:relative;padding:40px 44px;background:linear-gradient(transparent,rgba(11,31,51,.86) 58%);color:var(--white);display:grid;gap:10px;justify-items:start}
-.s .story h3{font-family:var(--serif);font-weight:600;font-size:48px;line-height:1;margin:0;max-width:14ch}
-.s .story p{margin:0;font-size:14px;max-width:42ch;color:#e3e8ec}
-
-/* reviews */
-.s .rvh{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.s .big{font-family:var(--display);font-weight:700;font-size:56px;color:var(--navy);line-height:1}
-.s .stars{color:var(--red);letter-spacing:3px;font-size:18px}
-.s .rvs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.s .rv{border:1px solid #e7e2d8;padding:20px;display:grid;gap:10px;align-content:start}
-.s .rv q{font-size:15px;line-height:1.5;color:#111820;quotes:"\201C" "\201D"}
-.s .rv .who{font-size:12px;color:#5b636c;display:flex;gap:6px;align-items:center}
-.s .rv .who b{color:var(--navy);font-weight:600}
-.s .rv .vf{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#2f6b4a;font-weight:600}
-
-/* email + footer */
-.s .mail{background:var(--navy);color:var(--bone)}
-.s .mail .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding-top:48px;padding-bottom:48px}
-.s .mail h2{font-family:var(--display);font-weight:700;font-size:44px;line-height:.95;margin:0;text-transform:uppercase}
-.s .mail p{margin:8px 0 0;color:#c4ccd5;font-size:13.5px}
-.s .mail .f{display:flex}
-.s .mail .f span{flex:1;background:var(--white);color:#7a828b;padding:15px 16px;font-size:13px}
-.s .mail .f b{background:var(--red);color:#fff;font-family:var(--display);letter-spacing:.1em;padding:15px 22px;font-size:16px}
-.s .foot{background:#111820;color:#aeb7c1;font-size:12.5px}
-.s .foot .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:28px;padding-top:44px;padding-bottom:26px}
-.s .foot h4{font-family:var(--display);font-size:16px;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin:0 0 10px}
-.s .foot ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-.s .foot .lg img{height:36px;filter:brightness(0) invert(1);opacity:.92}
-.s .foot .bt{border-top:1px solid #26313d;grid-column:1/-1;padding-top:16px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:11.5px}
-
-/* ============ PHONE (container query) ============ */
+/* ============ CELULAR ============ */
 @container site (max-width: 640px){
-  .s .wrap{padding:0 16px}
-  .s .ann{font-size:11.5px;padding:9px 12px}
-  .s .hdr-top{grid-template-columns:auto 1fr auto;gap:12px;padding:12px 16px}
-  .s .burger{display:block;width:22px;height:16px;border-top:2px solid #0B1F33;border-bottom:2px solid #0B1F33;position:relative}
-  .s .burger::after{content:"";position:absolute;left:0;right:0;top:5px;border-top:2px solid #0B1F33}
-  .s .hdr .logo{justify-self:center}
-  .s .hdr .logo img{height:30px}
-  .s .search{display:none}
-  .s .ico .acct{display:none}
-  .s .nav{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:18px;padding:4px 16px 12px;font-size:15px;scrollbar-width:none}
-  .s .nav a{white-space:nowrap}
-  .s .h1{font-size:54px}
-  .s .h-bogo,.s .h-bf{grid-template-columns:1fr;min-height:0}
-  .s .h-bogo .h-photo{order:-1;height:400px}
-  .s .h-copy{padding:26px 16px 30px;gap:14px}
-  .s .ctas .btn{flex:1;text-align:center;padding:14px 10px}
-  .s .bfgrid{grid-template-columns:repeat(3,1fr);gap:6px;padding:0 12px 24px;order:2}
-  .s .bfi b{font-size:12.5px}
-  .s .bfi .price{font-size:11.5px}
-  .s .h-gd{grid-template-columns:1fr 1fr;min-height:520px}
-  .s .h-gd .side{min-height:520px}
-  .s .h-gd .lab b{font-size:38px}
-  .s .h-gd .lab .btn{padding:11px 12px;font-size:13px}
-  .s .h-gd .top .t{font-size:18px;letter-spacing:.1em}
-  .s .cd span{font-size:18px;min-width:44px;padding:5px 7px 3px}
-  .s .trust{grid-template-columns:1fr 1fr}
-  .s .trust div{justify-content:flex-start;padding:12px 14px;flex-direction:column;align-items:flex-start;gap:0}
-  .s .trust div:nth-child(2){border-right:0}
-  .s .trust div:nth-child(-n+2){border-bottom:1px solid #e7e2d8}
-  .s .sec{padding:36px 0}
-  .s .sh h2{font-size:30px}
-  .s .brs{grid-template-columns:repeat(3,1fr);gap:8px}
-  .s .br{padding:12px 10px}
-  .s .br b{font-size:19px}
-  .s .br small{font-size:9px;letter-spacing:.1em}
-  .s .riv{grid-template-columns:1fr 1fr;gap:12px}
-  .s .rcard{aspect-ratio:3/4.6}
-  .s .rcard .ov{padding:50px 10px 12px;gap:8px}
-  .s .rcard .ov b{font-size:28px}
-  .s .rcard .ov span{display:none}
-  .s .rcard .ov .btn{padding:10px 10px;font-size:12.5px}
-  .s .pg{grid-template-columns:1fr 1fr;gap:12px}
-  .s .gdrow{grid-template-columns:1fr;gap:18px}
-  .s .gdrow .vs{border-left:0;border-top:1px solid #cfc8ba}
-  .s .lk{grid-auto-columns:72%}
-  .s .gr{grid-template-columns:1fr 1fr;gap:10px}
-  .s .chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
-  .s .chips a{white-space:nowrap}
-  .s .duo{grid-template-columns:1fr}
-  .s .story{min-height:480px}
-  .s .story .cp{padding:24px 18px}
-  .s .story h3{font-size:36px}
-  .s .rvs{grid-template-columns:1fr}
-  .s .rv:nth-child(n+2){display:none}
-  .s .mail .wrap{grid-template-columns:1fr;padding-top:32px;padding-bottom:32px}
-  .s .mail h2{font-size:32px}
-  .s .foot .wrap{grid-template-columns:1fr 1fr}
-  .s .foot .lg{grid-column:1/-1}
+  .s .wrap{padding:0 14px}
+  .s .ann{font-size:11.5px;padding:8px 12px}
+  .s .hdr .wrap{padding-top:12px;padding-bottom:12px}
+  .s .burger{display:block;width:20px;height:14px;border-top:1.8px solid #111820;border-bottom:1.8px solid #111820;position:relative}
+  .s .burger::after{content:"";position:absolute;left:0;right:0;top:4.2px;border-top:1.8px solid #111820}
+  .s .hdr .l .t,.s .hdr .r .t{display:none}
+  .s .logo img{height:28px}
+  .s .nav{display:none}
+  .s .hero{grid-template-columns:1fr}
+  .s .hero .im:nth-child(2){display:none}
+  .s .hero.dark{grid-template-columns:1fr 1fr}
+  .s .hero.dark .im:nth-child(2){display:block}
+  .s .hero.dark .im{aspect-ratio:2/3.4}
+  .s .hero .tx{bottom:26px}
+  .s .hero h1{font-size:40px}
+  .s .hero .sm{font-size:12.5px;padding:0 20px}
+  .s .hero.dark .side{bottom:18px;font-size:30px}
+  .s .trust{gap:6px 18px;font-size:11.5px;padding:12px}
+  .s .trust .x{display:none}
+  .s .sec{padding:40px 0}
+  .s .sh{margin-bottom:14px}
+  .s .sh h2{font-size:24px}
+  .s .g5{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:4px}
+  .s .g4{grid-template-columns:1fr 1fr;gap:4px}
+  .s .card .nm{font-size:12px}
+  .s .card .pr{font-size:12px}
+  .s .card b.br{font-size:16px}
+  .s .camp-h{padding:44px 16px 16px}
+  .s .camp-h h2{font-size:30px}
+  .s .camp-h p{display:none}
+  .s .camp a{aspect-ratio:2/3.2}
+  .s .camp span{font-size:30px;bottom:16px}
+  .s .gifts{font-size:19px;gap:8px 18px}
+  .s .gnote{font-size:12px}
+  .s .story{height:460px}
+  .s .story .tx{bottom:26px}
+  .s .story h3{font-size:34px;padding:0 16px}
+  .s .mail{padding:40px 16px}
+  .s .mail h2{font-size:22px}
+  .s .foot .wrap{flex-direction:column;padding-top:24px;padding-bottom:24px}
 }
 </style>
 
 <div class="ctl">
   <div class="ctl-in">
-    <h1>Armed Forces Gear · <span>Homepage nueva (simulación)</span></h1>
+    <strong>armedforcesgear.com · homepage nueva (simulación)</strong>
     <div class="ctl-g">
-      <span class="lbl">Fecha</span>
       <div class="seg" role="group" aria-label="Momento de la temporada">
-        <button type="button" id="st-bogo" data-set="bogo" aria-pressed="true">Hoy · BOGO</button>
-        <button type="button" id="st-bf" data-set="bf" aria-pressed="false">Black Friday</button>
-        <button type="button" id="st-gd" data-set="gd" aria-pressed="false">Game Day 12.12</button>
+        <button type="button" data-set="bogo" aria-pressed="true">Hoy (BOGO)</button>
+        <button type="button" data-set="bf" aria-pressed="false">Black Friday</button>
+        <button type="button" data-set="gd" aria-pressed="false">Game Day</button>
       </div>
-      <span class="lbl">Vista</span>
-      <div class="seg" role="group" aria-label="Tamaño de pantalla">
+      <div class="seg" role="group" aria-label="Pantalla">
         <button type="button" id="vw-d" aria-pressed="true">Desktop</button>
         <button type="button" id="vw-p" aria-pressed="false">Celular</button>
       </div>
@@ -321,244 +202,123 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
   </div>
 </div>
 
-<div class="stage" id="stage">
-<div class="device">
-<div class="s bogo" id="site">
+<div class="stage" id="stage"><div class="device"><div class="s bogo" id="site">
 
-  <!-- ANNOUNCEMENT -->
-  <div class="ann" data-note="Barra fija: un solo mensaje por periodo. Antes rotaba 3 y el código se veía 1 de cada 3 segundos.">
-    <span data-st="bogo"><b>Buy 1, Get 1 50% Off</b> on the AFG Collection · Code <b>BOGONO26</b> · Free shipping on $75+</span>
-    <span data-st="bf"><b>Black Friday · 20% Off</b> the Everyday Collection · Code <b>BF2026</b> · Free shipping on $75+</span>
-    <span data-st="gd"><b>Army vs. Navy · Saturday 12.12</b> · Order by Dec 15 for Christmas delivery</span>
+  <div class="ann" data-note="Una sola línea corta. La promo vive aquí y en una línea chica del hero, no en 3 banners.">
+    <span data-st="bogo">Buy 1, get 2nd 50% off with code BOGONO26</span>
+    <span data-st="bf">Black Friday: 20% off with code BF2026</span>
+    <span data-st="gd">Order by December 15 for Christmas delivery</span>
   </div>
 
-  <!-- HEADER -->
-  <header class="hdr" data-note="Mismo header de hoy con el logo real. Cambios: el menú en Barlow, 'SALE' en rojo al final y sin la franja Track/Returns/Catalog (se fue al footer).">
-    <div class="hdr-top">
-      <span class="burger" aria-hidden="true"></span>
+  <header class="hdr" data-note="Logo al centro, menú limpio. Track my order, Returns y Catalog pasan al footer.">
+    <div class="wrap">
+      <div class="l"><span class="burger" aria-hidden="true"></span><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span class="t">Search</span></div>
       <a class="logo"><img src="img/logo.png" alt="Armed Forces Gear, Est. 1996"></a>
-      <div class="search"><span>Search hoodies, hats, mugs, gifts…</span><b><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></b></div>
-      <div class="ico">
-        <svg class="acct" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>
-        <span class="cartn"><svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11h11l2-8H6.5"/><circle cx="9" cy="19.5" r="1.4"/><circle cx="17" cy="19.5" r="1.4"/></svg><i>2</i></span>
-      </div>
+      <div class="r"><span class="t">Account</span><span class="cart"><svg class="ic" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><i>2</i></span></div>
     </div>
-    <nav class="nav"><a>Army</a><a>Marine Corps</a><a>Navy</a><a>Air Force</a><a>Coast Guard</a><a>Space Force</a><a>Veteran</a><a>Gift Guide</a><a class="sale">Sale</a></nav>
+    <nav class="nav"><a>Army</a><a>Marine Corps</a><a>Navy</a><a>Air Force</a><a>Coast Guard</a><a>Space Force</a><a>Veteran</a><a>Gifts</a><a class="sale">Sale</a></nav>
   </header>
 
-  <!-- HERO · BOGO -->
-  <section class="h-bogo" data-st="bogo" data-note="UN solo hero (antes eran 3 banners de BOGO, Navy y Army). Foto real de Marpipe con un producto que SÍ entra en el BOGO: el Marines Pack-N-Go, #1 de la marca AFG.">
-    <div class="h-copy">
-      <div class="kick">The AFG Collection · This week only</div>
-      <h2 class="h1">Buy one,<br>get one<br><em>50% off</em></h2>
-      <p class="sub">Tees, hoods, quarter-zips and Pack-N-Go jackets for every branch. Mix and match.</p>
-      <div class="ctas"><a class="btn">Shop the sale</a><a class="btn line" href="#branches">Shop your branch</a></div>
-      <div class="code">Use code <b>BOGONO26</b> Ends Sun 11/23</div>
-      <span class="fine">AFG Collection only. Not combinable with other offers.</span>
-    </div>
-    <div class="h-photo">
-      <img src="img/p_marines_png.jpg" alt="Hombre con el Marines EGA Pack-N-Go Pullover color navy">
-      <div class="ptag"><b>Marines EGA Pack-N-Go Pullover</b>$46.00 · <span>2nd one 50% off</span></div>
-    </div>
+  <!-- HERO -->
+  <section class="hero" data-st="bogo" data-note="Hero limpio: dos fotos de estudio en el mismo beige, un titular y un botón. La promo es una línea chica, no el protagonista.">
+    <div class="im"><img src="img/g_navy_tee.jpg" alt="Mujer con playera gris de Navy en estudio beige"></div>
+    <div class="im"><img src="img/g_army_nike.jpg" alt="Hombre con hoodie verde Army Nike en estudio beige"></div>
+    <div class="tx"><h1>Gear for every branch</h1><span class="sm">Buy one, get one 50% off the AFG Collection</span><a class="lnk">Shop now</a></div>
+  </section>
+  <section class="hero" data-st="bf" data-note="Black Friday: mismo formato, solo cambian las fotos y una línea.">
+    <div class="im"><img src="img/g_cg.jpg" alt="Mujer con playera de Coast Guard en estudio beige"></div>
+    <div class="im"><img src="img/g_marines.jpg" alt="Hombre con el Marines Pack-N-Go en estudio beige"></div>
+    <div class="tx"><h1>Black Friday</h1><span class="sm">20% off the Everyday Collection, through Sunday</span><a class="lnk">Shop now</a></div>
+  </section>
+  <section class="hero dark" data-st="gd" data-note="La campaña en contexto: el estadio, cada lado separado. Del 2 al 12 de diciembre (en 2025 fue el mejor día de ventas).">
+    <a class="im"><img src="img/gd_navy_td.jpg" alt="Fan de Navy celebrando en el estadio"></a>
+    <a class="im"><img src="img/gd_army_td.jpg" alt="Fan de Army celebrando en el estadio"></a>
+    <span class="side" style="left:0;width:50%;text-align:center">Navy</span>
+    <span class="side" style="right:0;width:50%;text-align:center">Army</span>
   </section>
 
-  <!-- HERO · BLACK FRIDAY -->
-  <section class="h-bf" data-st="bf" data-note="Black Friday: el precio tachado ancla el ahorro. Son los 6 más vendidos, todos dentro del Everyday Collection (verificado en Shopify).">
-    <div class="h-copy">
-      <div class="kick">Black Friday · Nov 26–30</div>
-      <h2 class="h1">20% off<br>gifts they'll<br><em>actually wear</em></h2>
-      <p class="sub">The Everyday Collection, every branch. Hoods, quarter-zips and crews your family already asks for.</p>
-      <div class="ctas"><a class="btn">Shop Black Friday</a><a class="btn line">Gift guide</a></div>
-      <div class="code">Use code <b>BF2026</b> Through Sun 11/30</div>
-    </div>
-    <div class="bfgrid">
-      <a class="bfi"><img src="img/pr_bs_armyhood.jpg" alt=""><b>Army Star Tackle Twill Hood</b><span class="price"><s>$60</s><span class="off">$48</span></span></a>
-      <a class="bfi"><img src="img/pr_bs_bones.jpg" alt=""><b>Navy Fear The Bones Hood</b><span class="price"><s>$60</s><span class="off">$48</span></span></a>
-      <a class="bfi"><img src="img/pr_army_qz.jpg" alt=""><b>Army Star Quarter Zip</b><span class="price"><s>$58</s><span class="off">$46.40</span></span></a>
-      <a class="bfi"><img src="img/pr_bs_navyqz.jpg" alt=""><b>Navy Anchor Quarter Zip</b><span class="price"><s>$58</s><span class="off">$46.40</span></span></a>
-      <a class="bfi"><img src="img/pr_bs_diana.jpg" alt=""><b>Army Ladies Diana Mock</b><span class="price"><s>$64</s><span class="off">$51.20</span></span></a>
-      <a class="bfi"><img src="img/pr_bs_proweave.jpg" alt=""><b>Army Proweave Hood</b><span class="price"><s>$64</s><span class="off">$51.20</span></span></a>
-    </div>
-  </section>
-
-  <!-- HERO · GAME DAY -->
-  <section class="h-gd" data-st="gd" data-note="Del 2 al 12 de diciembre: el día del juego fue el MEJOR día de 2025 ($36.7k). Cada rama en su lado, separadas por una línea, sin tocarse, con contador.">
-    <a class="side"><img src="img/gd_navy_td.jpg" alt="Fan de Navy celebrando en el estadio con la hoodie Under Armour 2026 Rivalry"><div class="lab"><b>NAVY</b><span class="btn light">Shop Navy Rivalry</span></div></a>
-    <a class="side"><img src="img/gd_army_td.jpg" alt="Fan de Army celebrando en el estadio con la playera Beat Navy"><div class="lab"><b>ARMY</b><span class="btn light">Shop Army Rivalry</span></div></a>
-    <div class="divider"></div>
-    <div class="top"><div class="t"><span>Game Day · 12.12</span></div><div class="cd js-cd"></div></div>
-  </section>
-
-  <!-- TRUST -->
-  <div class="trust" data-note="Confianza pegada al hero, como Grunt Style. Antes las 12,512 reseñas estaban hasta abajo. 66% de las órdenes son de clientes nuevos.">
-    <div><b><span class="st">★</span> 4.73</b><span>12,512 reviews</span></div>
-    <div><b>Free shipping</b><span>on orders $75+</span></div>
-    <div><b>60-day</b><span>hassle-free returns</span></div>
-    <div><b>Since 1996</b><span>family owned</span></div>
+  <div class="trust" data-note="La confianza en una sola línea discreta.">
+    <span><b>4.73 ★</b> 12,512 reviews</span><span><b>Free shipping</b> over $75</span><span class="x"><b>60-day</b> returns</span><span class="x"><b>Since 1996</b></span>
   </div>
 
-  <!-- GAME DAY GEAR (only gd) -->
-  <section class="sec" data-st="gd" data-note="En Game Day, justo debajo del hero: el producto de cada lado.">
+  <!-- RAMAS -->
+  <section class="sec" data-note="Cinco fotos de estudio con el mismo beige, una por rama. Air Force todavía es foto de producto: falta generarla con tu casting en Marpipe.">
     <div class="wrap">
-      <div class="sh"><div><h2>Game day gear</h2><p>Official 2026 Rivalry from Under Armour and Nike. Limited runs.</p></div></div>
-      <div class="gdrow">
-        <div class="grp"><h3>NAVY</h3>
-          <a class="pc cut"><div class="im"><img src="img/pr_riv_navy.jpg" alt=""><span class="bd">#1 this month</span></div><span class="nm">Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)</span><span class="price">$112.00</span></a>
-          <a class="pc cut"><div class="im"><img src="img/pr_navy_jersey.jpg" alt=""></div><span class="nm">Navy Under Armour 2026 Rivalry Men's Football Replica Jersey (White)</span><span class="price">$120.00</span></a>
-        </div>
-        <div class="vs"></div>
-        <div class="grp"><h3>ARMY</h3>
-          <a class="pc cut"><div class="im"><img src="img/pr_riv_army.jpg" alt=""></div><span class="nm">Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)</span><span class="price">$105.00</span></a>
-          <a class="pc cut"><div class="im"><img src="img/pr_ivy_hood.jpg" alt=""></div><span class="nm">Army Nike 2026 Rivalry Ivy Soldier Therma Hood (Grey)</span><span class="price">$105.00</span></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BRANCHES -->
-  <section class="sec" id="branches" data-note="Subió de la sección 18 a la 3, con las 6 ramas (antes faltaba Space Force). La temporada pasada Army, Navy, Marines y Air Force vendieron casi igual: la gente compra por rama.">
-    <div class="wrap">
-      <div class="sh"><div><h2>Shop your branch</h2><p>Officially licensed gear for every branch and the families behind them.</p></div></div>
-      <div class="brs">
-        <a class="br"><span class="star">★</span><b>Army</b><small><span>EST. 1775</span><span>→</span></small></a>
-        <a class="br"><span class="star">★</span><b>Marine<br>Corps</b><small><span>EST. 1775</span><span>→</span></small></a>
-        <a class="br"><span class="star">★</span><b>Navy</b><small><span>EST. 1775</span><span>→</span></small></a>
-        <a class="br"><span class="star">★</span><b>Air<br>Force</b><small><span>EST. 1947</span><span>→</span></small></a>
-        <a class="br"><span class="star">★</span><b>Coast<br>Guard</b><small><span>EST. 1790</span><span>→</span></small></a>
-        <a class="br"><span class="star">★</span><b>Space<br>Force</b><small><span>EST. 2019</span><span>→</span></small></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- RIVALRY (bogo + bf) -->
-  <section class="sec" style="padding-top:0" data-st="bogo bf" data-note="Antes eran 2 banners completos (Navy y Army) peleándose con el BOGO. Ahora es un solo bloque: cada lado con su foto y una línea en medio. La exclusión de promos se dice como 'full price, limited runs'.">
-    <div class="wrap">
-      <div class="sh"><div class="riv-h"><h2>Army vs. Navy · Pick your side</h2><div class="cd js-cd"></div></div><p style="flex-basis:100%">2026 Rivalry collections from Under Armour and Nike. Full price, limited runs.</p></div>
-      <div class="riv">
-        <a class="rcard"><img src="img/pos_navy.jpg" alt="Hombre con la full zip Navy Under Armour 2026 Rivalry en una rampa del estadio"><div class="ov"><div><b>NAVY</b><span>Under Armour 2026 Rivalry</span></div><span class="btn light">Shop Navy</span></div></a>
-        <a class="rcard"><img src="img/pos_army.jpg" alt="Hombre con la hoodie Army Nike 2026 Rivalry West Point en una rampa del estadio"><div class="ov"><div><b>ARMY</b><span>Nike 2026 Rivalry</span></div><span class="btn light">Shop Army</span></div></a>
+      <div class="sh"><h2>Shop by branch</h2></div>
+      <div class="g5">
+        <a class="card"><div class="im"><img src="img/g_army.jpg" alt=""></div><b class="br">Army</b></a>
+        <a class="card"><div class="im"><img src="img/g_marines.jpg" alt=""></div><b class="br">Marine Corps</b></a>
+        <a class="card"><div class="im"><img src="img/g_navy.jpg" alt=""></div><b class="br">Navy</b></a>
+        <a class="card"><div class="im"><img src="img/c_af.jpg" alt=""></div><b class="br">Air Force</b></a>
+        <a class="card"><div class="im"><img src="img/g_cg.jpg" alt=""></div><b class="br">Coast Guard</b></a>
       </div>
     </div>
   </section>
 
   <!-- BEST SELLERS -->
-  <section class="sec" style="padding-top:0" data-note="Antes aquí iba New Arrivals, que convierte 0.79% (la peor). Ahora van los best sellers reales del mes, puestos en personas reales de tu casting.">
+  <section class="sec" style="padding-top:0" data-note="Los 4 más vendidos, en el mismo beige. Hoy son foto de producto; con la sesión de Marpipe se cambian por gente usándolos.">
     <div class="wrap">
-      <div class="sh"><div><h2>Best sellers right now</h2><p>What military families are ordering this week.</p></div><a class="more">Shop all best sellers</a></div>
-      <div class="pg">
-        <a class="pc"><div class="im"><img src="img/bf_army_hood.jpg" alt="Hombre con la Army Star Tackle Twill Embroidered Fleece Hood negra"><span class="bd">#1 Army</span></div>
-          <span class="nm">Army Star Tackle Twill Embroidered Fleece Hood (Black)</span><span class="rt"><i>★★★★★</i></span>
-          <span class="price"><span data-st="bogo gd">$60.00</span><span data-st="bf"><s>$60.00</s><span class="off">$48.00</span></span></span></a>
-        <a class="pc"><div class="im"><img src="img/bf_navy_hood.jpg" alt="Hombre con la Navy Fear The Bones Tackle Twill Embroidered Fleece Hood"><span class="bd">#1 Navy</span></div>
-          <span class="nm">Navy Fear The Bones Tackle Twill Embroidered Fleece Hood (Navy)</span><span class="rt"><i>★★★★★</i></span>
-          <span class="price"><span data-st="bogo gd">$60.00</span><span data-st="bf"><s>$60.00</s><span class="off">$48.00</span></span></span></a>
-        <a class="pc"><div class="im"><img src="img/bf_navy_qz.jpg" alt="Mujer con el Navy Anchor Tackle Twill Embroidered Fleece Quarter Zip"><span class="bd">Gift pick</span></div>
-          <span class="nm">Navy Anchor Tackle Twill Embroidered Fleece Quarter Zip (Navy)</span><span class="rt"><i>★★★★★</i></span>
-          <span class="price"><span data-st="bogo gd">$58.00</span><span data-st="bf"><s>$58.00</s><span class="off">$46.40</span></span></span></a>
-        <a class="pc"><div class="im"><img src="img/bf_army_qz.jpg" alt="Mujer con el Army Star Tackle Twill Embroidered Fleece Quarter Zip negro"><span class="bd">Women's fave</span></div>
-          <span class="nm">Army Star Tackle Twill Embroidered Fleece Quarter Zip (Black)</span><span class="rt"><i>★★★★★</i></span>
-          <span class="price"><span data-st="bogo gd">$58.00</span><span data-st="bf"><s>$58.00</s><span class="off">$46.40</span></span></span></a>
+      <div class="sh"><h2>Best sellers</h2><a class="lnk">View all</a></div>
+      <div class="g4">
+        <a class="card"><div class="im"><img src="img/c_armyhood.jpg" alt=""></div><span class="nm">Army Star Tackle Twill Embroidered Fleece Hood (Black)</span><span class="pr"><span data-st="bogo gd">$60.00</span><span data-st="bf"><s>$60.00</s><span class="now">$48.00</span></span></span></a>
+        <a class="card"><div class="im"><img src="img/c_bones.jpg" alt=""></div><span class="nm">Navy Fear The Bones Tackle Twill Embroidered Fleece Hood (Navy)</span><span class="pr"><span data-st="bogo gd">$60.00</span><span data-st="bf"><s>$60.00</s><span class="now">$48.00</span></span></span></a>
+        <a class="card"><div class="im"><img src="img/c_navyqz.jpg" alt=""></div><span class="nm">Navy Anchor Tackle Twill Embroidered Fleece Quarter Zip (Navy)</span><span class="pr"><span data-st="bogo gd">$58.00</span><span data-st="bf"><s>$58.00</s><span class="now">$46.40</span></span></span></a>
+        <a class="card"><div class="im"><img src="img/c_png.jpg" alt=""></div><span class="nm">Marines EGA Pack-N-Go Pullover</span><span class="pr"><span data-st="bogo">$46.00 · 2nd 50% off</span><span data-st="gd">$46.00</span><span data-st="bf"><s>$46.00</s><span class="now">$36.80</span></span></span></a>
       </div>
     </div>
   </section>
 
-  <!-- GIFTS -->
-  <section class="sec" style="background:var(--bone)" data-note="Junta 4 secciones que estaban sueltas (mugs, ornaments, papel de regalo, gift card) en un solo bloque. Los atajos por persona y precio usan colecciones que ya existen (gifts-under-25/50/75).">
-    <div class="wrap">
-      <div class="sh"><div><h2>Gifts for…</h2><p>Not sure what to get? Start with who it's for.</p></div><a class="more">Full gift guide</a></div>
-      <div class="chips"><a class="on">Dad</a><a>Mom</a><a>Veterans</a><a>Kids</a><a>Under $25</a><a>Under $50</a><a>E-Gift Card</a></div>
-      <div class="gr">
-        <a class="gt"><img src="img/pr_g_orn.jpg" alt=""><div class="gl"><b>Ornaments</b><span>From $14</span></div></a>
-        <a class="gt"><img src="img/pr_g_mug.jpg" alt=""><div class="gl"><b>Mugs &amp; drinkware</b><span>Every branch</span></div></a>
-        <a class="gt"><img src="img/pr_g_blanket.jpg" alt=""><div class="gl"><b>Proud to Serve blankets</b><span>$34</span></div></a>
-        <a class="gt"><img src="img/pr_g_flannel.jpg" alt=""><div class="gl"><b>Holiday flannel pants</b><span>From $40</span></div></a>
-      </div>
-      <div class="ship"><span class="dotr"></span><span><b>Order by Dec 15</b> for Christmas delivery. After that, send an <b>E-Gift Card</b> instantly.</span></div>
+  <!-- CAMPAÑA ARMY VS NAVY -->
+  <section data-st="bogo bf" data-note="La única campaña en contexto de la página: cada lado en su foto, sin tocarse. Rivalry no entra en promociones.">
+    <div class="camp-h"><h2>Army vs. Navy</h2><p>Saturday, December 12</p></div>
+    <div class="camp">
+      <a><img src="img/pos_navy.jpg" alt="Hombre con la full zip Navy Under Armour 2026 Rivalry"><span>Shop Navy</span></a>
+      <a><img src="img/pos_army.jpg" alt="Hombre con la hoodie Army Nike 2026 Rivalry"><span>Shop Army</span></a>
     </div>
   </section>
 
-  <!-- LOOKBOOK -->
-  <section class="sec look" data-note="El momento 'Zara': fotos editoriales de tu parrilla Menyard v3 (aprobada el 18 nov). Reemplaza el 'Shop the Look' de otoño. Se desliza de lado y cada foto lleva a su producto.">
+  <!-- REGALOS -->
+  <section class="sec" data-note="Regalos sin fotos ni banners: solo atajos. En diciembre es la forma más rápida de encontrar algo.">
     <div class="wrap">
-      <div class="sh"><div><h2>Wear your branch</h2><p>Real people, real pride. Tap a look to shop it.</p></div><a class="more">Shop new arrivals</a></div>
-      <div class="lk">
-        <a><img src="img/p_navy_qz_studio.jpg" alt="Hombre con el quarter zip Navy Anchor en estudio azul"><span class="dot" style="top:33%;left:52%">+</span><div class="lt"><b>Navy Anchor Tackle Twill Quarter Zip</b><span>$58</span></div></a>
-        <a><img src="img/p_diner.jpg" alt="Dos amigas sentadas frente a un diner, una con el Army Star quarter zip"><span class="dot" style="top:47%;left:26%">+</span><div class="lt"><b>Army Star Tackle Twill Quarter Zip</b><span>$58</span></div></a>
-        <a><img src="img/p_library.jpg" alt="Hombre con hoodie roja de Marines en una biblioteca"><div class="lt"><b>Marine Corps hoodies</b><span>Shop →</span></div></a>
-        <a><img src="img/p_tailgate.jpg" alt="Dos amigos en un tailgate, uno con la Army Star Tackle Twill Hood"><span class="dot" style="top:44%;left:36%">+</span><div class="lt"><b>Army Star Tackle Twill Hood</b><span>$60</span></div></a>
-        <a><img src="img/p_navy_tee.jpg" alt="Mujer con playera gris de Navy en estudio"><div class="lt"><b>Navy tees</b><span>Shop →</span></div></a>
-        <a><img src="img/p_bleachers.jpg" alt="Pareja en las gradas, él con el jersey Navy 12"><span class="dot" style="top:42%;left:34%">+</span><div class="lt"><b>Navy UA 2026 Rivalry Replica Jersey</b><span>$120</span></div></a>
-        <a><img src="img/p_army_nike.jpg" alt="Hombre con la hoodie verde Army Nike Rivalry con bandera"><span class="dot" style="top:30%;left:47%">+</span><div class="lt"><b>Army Nike 2026 Rivalry Flag Hood</b><span>$105</span></div></a>
-      </div>
+      <div class="sh" style="justify-content:center"><h2>Gifts</h2></div>
+      <div class="gifts"><a>For Dad</a><a>For Mom</a><a>For Veterans</a><a>Under $25</a><a>Gift Cards</a></div>
+      <p class="gnote">Order by December 15 for Christmas delivery.</p>
     </div>
   </section>
 
-  <!-- STORIES -->
-  <section class="duo" data-note="La historia va DESPUÉS de la oferta y el producto. Titulares en Cormorant (categoría Heritage). Antes Family medía 1,280 px y cortaba caras; ahora los dos van lado a lado.">
-    <a class="story"><img src="img/p_homecoming.jpg" alt="Un veterano con gorra de Navy y un joven frente a una casa blanca con su perro" style="object-position:center 60%"><div class="cp"><h3>Pride across generations.</h3><p>From the ones who served to the ones who wait at home. Gear for the whole military family.</p><span class="btn light">Shop family</span></div></a>
-    <a class="story"><img src="img/life_vet.jpg" alt="Un veterano de Coast Guard y una veterana de Navy sonriendo en un muelle"><div class="cp"><h3>Different branches. One shared legacy.</h3><p>Veteran apparel made to honor where you served.</p><span class="btn light">Shop veteran</span></div></a>
+  <!-- HISTORIA -->
+  <section class="story" data-note="Una sola foto de campaña bien hecha para cerrar con emoción. Cormorant porque es Heritage.">
+    <img src="img/p_homecoming.jpg" alt="Un veterano y un joven frente a una casa blanca con su perro">
+    <div class="tx"><h3>Pride across generations</h3><a class="lnk">Shop military family</a></div>
   </section>
 
-  <!-- REVIEWS -->
-  <section class="sec" data-note="Las reseñas se quedan abajo como cierre, pero el número ya apareció arriba en la franja de confianza.">
-    <div class="wrap">
-      <div class="rvh"><h2 style="font-family:var(--display);font-weight:700;font-size:40px;color:#0B1F33;text-transform:uppercase;margin:0;line-height:1">Built on trust</h2><span class="big">4.73</span><span><span class="stars">★★★★★</span><br><span style="font-size:12.5px;color:#5b636c">12,512 verified reviews</span></span></div>
-      <div class="rvs">
-        <div class="rv"><span class="stars">★★★★★</span><q>I loved surprising my Army Veteran co-workers with these shirts.</q><div class="who"><b>Fae B.</b> · Army Veteran Flag Long Sleeve T-Shirt</div><span class="vf">✓ Verified buyer</span></div>
-        <div class="rv"><span class="stars">★★★★★</span><q>My Marines were very pleased with the quality of the mugs.</q><div class="who"><b>Kim</b> · Marines Bulldog Mug (Red)</div><span class="vf">✓ Verified buyer</span></div>
-        <div class="rv"><span class="stars">★★★★★</span><q>Very fast shipping, wrapped for protection!</q><div class="who"><b>Kim</b> · Armed Forces Gear</div><span class="vf">✓ Verified buyer</span></div>
-      </div>
-    </div>
+  <section class="mail" data-note="Email sin bloque de color: una línea y el campo.">
+    <h2>20% off your first order</h2><p>Join for new arrivals and members-only offers.</p>
+    <div class="f"><span>Email address</span><b>SUBSCRIBE</b></div>
   </section>
 
-  <!-- EMAIL -->
-  <section class="mail" data-note="Se mantiene. Es el único bloque de color sólido: captura a quien no compró hoy para recuperarlo en Black Friday.">
+  <footer class="foot" data-note="Footer corto con lo que salió de arriba.">
     <div class="wrap">
-      <div><h2>Take 20% off your first order</h2><p>Rivalry drops, new arrivals and members-only offers. No spam, just gear.</p></div>
-      <div class="f"><span>Email address</span><b>JOIN</b></div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="foot" data-note="Aquí llegan Track my order, Returns y Catalog, que antes ocupaban la parte de arriba.">
-    <div class="wrap">
-      <div class="lg"><img src="img/logo.png" alt="Armed Forces Gear"><p style="margin:12px 0 0;max-width:34ch">8211-B Cloverleaf Drive, Millersville, MD 21108<br>(410) 766-2600 · M–F 9:00am–5:00pm EST</p></div>
-      <div><h4>Orders</h4><ul><li>Track my order</li><li>Start a return or exchange</li><li>Shipping &amp; returns</li><li>International checkout</li></ul></div>
-      <div><h4>Shop</h4><ul><li>Gift guide</li><li>E-Gift Card</li><li>Military discount</li><li>Download our catalog</li></ul></div>
-      <div><h4>Help</h4><ul><li>Help center</li><li>Contact us</li><li>About AFG</li></ul></div>
-      <div class="bt"><span>© 2026 Armed Forces Gear · Est. 1996</span><span>Officially licensed military apparel</span></div>
+      <ul><li>Track my order</li><li>Returns &amp; exchanges</li><li>Shipping</li><li>Military discount</li><li>Gift cards</li><li>Catalog</li><li>Contact</li></ul>
+      <span>(410) 766-2600 · Millersville, MD · Since 1996</span>
     </div>
   </footer>
 
-</div>
-</div>
-</div>
+</div></div></div>
 
 <script>
 (function(){
   var site=document.getElementById('site'), stage=document.getElementById('stage');
-  // season state
   var sb=[].slice.call(document.querySelectorAll('[data-set]'));
   sb.forEach(function(b){b.addEventListener('click',function(){
     site.classList.remove('bogo','bf','gd'); site.classList.add(b.dataset.set);
     sb.forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
   })});
-  // viewport
   var d=document.getElementById('vw-d'), p=document.getElementById('vw-p');
   function vw(ph){stage.classList.toggle('phone',ph);d.setAttribute('aria-pressed',String(!ph));p.setAttribute('aria-pressed',String(ph));}
   d.addEventListener('click',function(){vw(false)}); p.addEventListener('click',function(){vw(true)});
-  // notes
   var n=document.getElementById('notes');
   n.addEventListener('click',function(){var on=n.getAttribute('aria-pressed')!=='true';n.setAttribute('aria-pressed',String(on));n.textContent=on?'Ocultar notas':'Ver notas';site.classList.toggle('notes',on);});
-  // countdown to Army–Navy game day, Sat Dec 12 2026 (midnight ET)
-  var target=Date.UTC(2026,11,12,5,0,0);
-  function pad(x){return (x<10?'0':'')+x}
-  function tick(){
-    var ms=Math.max(0,target-Date.now()), dd=Math.floor(ms/864e5), hh=Math.floor(ms%864e5/36e5), mm=Math.floor(ms%36e5/6e4);
-    var html='<span>'+dd+'<small>DAYS</small></span><span>'+pad(hh)+'<small>HRS</small></span><span>'+pad(mm)+'<small>MIN</small></span>';
-    [].forEach.call(document.querySelectorAll('.js-cd'),function(e){e.innerHTML=html});
-  }
-  tick(); setInterval(tick,30000);
 })();
 </script>
 
