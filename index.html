@@ -180,6 +180,16 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .bfb .t{position:absolute;top:50%;right:5%;transform:translateY(-50%);display:grid;gap:8px;justify-items:start;color:var(--navy)}
 .s .bfb b{font-size:clamp(22px,2.6vw,38px);font-weight:900;text-transform:uppercase;line-height:1}
 .s .bfb em{font-style:normal;font-size:15px;color:#3d3a36}
+/* ramas editorial: 3x2, cara completa, nombre sobre la foto */
+.s .brs9{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.s .brs9 a{position:relative;overflow:hidden;display:block;background:#e8dccb}
+.s .brs9 img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.s .brs9 a:hover img{transform:scale(1.035)}
+.s .brs9 a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(10,16,34,0),rgba(10,16,34,.42))}
+.s .brs9 .n{position:absolute;z-index:2;left:26px;bottom:22px;right:26px;display:flex;justify-content:space-between;align-items:baseline;color:#fff}
+.s .brs9 .n b{font-size:clamp(20px,2vw,28px);font-weight:500;letter-spacing:.2px}
+.s .brs9 .n i{font-style:normal;font-size:20px;opacity:0;transform:translateX(-6px);transition:all .4s ease}
+.s .brs9 a:hover .n i{opacity:1;transform:none}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -237,6 +247,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .hero8 h1{font-size:40px}
   .s .hero8 p{font-size:13.5px}
   .s .hero8 .code{padding:4px 8px;font-size:11.5px}
+  .s .brs9{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
+  .s .brs9 a{scroll-snap-align:start}
+  .s .brs9 .n{left:16px;bottom:14px}
   .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
   .s .rail{grid-auto-columns:44%}
   .s .railwrap::after{width:50px}
@@ -294,10 +307,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </section>
 
   <!-- RAMAS -->
-  <section class="sec" data-note="SHOP BY BRANCH: 6 fotos nuevas, mismo estudio, mismo encuadre (barbilla a cintura): el producto es el protagonista.">
+  <section class="sec" data-note="SHOP BY BRANCH editorial: 6 fotos del mismo estudio, cara completa y de la cintura para arriba, 3 por fila, nombre sobre la foto (sin repetir SHOP). En celular se desliza.">
     <div class="wrap">
       <div class="sh"><h2 class="h2">Shop by Branch</h2></div>
-      <div class="brs8"><a><div class="im"><img src="img/v8/army.jpg" alt="Army" loading="lazy"></div><span class="l">Shop Army</span></a><a><div class="im"><img src="img/v8/marines.jpg" alt="Marines" loading="lazy"></div><span class="l">Shop Marines</span></a><a><div class="im"><img src="img/v8/navy.jpg" alt="Navy" loading="lazy"></div><span class="l">Shop Navy</span></a><a><div class="im"><img src="img/v8/airforce.jpg" alt="Air Force" loading="lazy"></div><span class="l">Shop Air Force</span></a><a><div class="im"><img src="img/v8/cg.jpg" alt="Coast Guard" loading="lazy"></div><span class="l">Shop Coast Guard</span></a><a><div class="im"><img src="img/v8/sf.jpg" alt="Space Force" loading="lazy"></div><span class="l">Shop Space Force</span></a></div>
+      <div class="brs9"><a><img src="img/v8/b_army.jpg" alt="Army" loading="lazy"><span class="n"><b>Army</b><i>→</i></span></a><a><img src="img/v8/b_marines.jpg" alt="Marine Corps" loading="lazy"><span class="n"><b>Marine Corps</b><i>→</i></span></a><a><img src="img/v8/b_navy.jpg" alt="Navy" loading="lazy"><span class="n"><b>Navy</b><i>→</i></span></a><a><img src="img/v8/b_airforce.jpg" alt="Air Force" loading="lazy"><span class="n"><b>Air Force</b><i>→</i></span></a><a><img src="img/v8/b_cg.jpg" alt="Coast Guard" loading="lazy"><span class="n"><b>Coast Guard</b><i>→</i></span></a><a><img src="img/v8/b_sf.jpg" alt="Space Force" loading="lazy"><span class="n"><b>Space Force</b><i>→</i></span></a></div>
     </div>
   </section>
 
