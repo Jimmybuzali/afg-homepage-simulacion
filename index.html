@@ -144,10 +144,11 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 /* v8: HERO foto de estudio con el texto en el espacio libre (sin degradado, sin franja) */
 .s .hero8{position:relative;background:#e8dccb}
 .s .hero8 img{width:100%;height:auto;aspect-ratio:1376/768;object-fit:cover}
-.s .hero8 .tx{position:absolute;top:50%;transform:translateY(-50%);right:max(var(--pad),calc((100% - 1400px)/2 + var(--pad)));width:min(27%,380px);display:grid;gap:14px;justify-items:start;color:var(--navy)}
+.s .hero8 .tx{position:absolute;top:50%;transform:translateY(-50%);left:54%;width:min(36%,500px);display:grid;gap:14px;justify-items:start;color:var(--navy)}
 .s .hero8 .k{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#6b5b48}
-.s .hero8 h1{margin:0;font-size:clamp(30px,3.6vw,54px);line-height:.95;font-weight:900;text-transform:uppercase;color:var(--navy);letter-spacing:-.5px}
-.s .hero8 p{margin:0;font-size:15px;color:#3d3a36}
+.s .hero8 h1{margin:0;font-size:clamp(36px,5vw,76px);line-height:.92;font-weight:900;text-transform:uppercase;color:var(--navy);letter-spacing:-.5px}
+.s .hero8 p{margin:0;font-size:16px;line-height:1.5;color:#3d3a36;max-width:380px}
+.s .hero8 .b{margin-top:10px}
 .s .hero8 .code{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--navy);padding:6px 10px}
 .s .hero8 .b{display:flex;gap:8px;flex-wrap:wrap}
 /* ramas: mismo encuadre barbilla-cintura, mismo fondo */
@@ -165,8 +166,12 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .bsx .railwrap::after{background:linear-gradient(90deg,rgba(20,29,60,0),var(--navy))}
 .s .bsx .bar{background:rgba(255,255,255,.18)}.s .bsx .bar i{background:#fff}
 .s .bsx .arrows button{background:#fff;color:var(--navy)}
-/* banner de descuento real del sitio */
+/* banner de descuento: más chico que el hero */
+.s .promo .pb{display:block;max-width:1080px;margin:0 auto;position:relative}
 .s .promo img{width:100%;height:auto}
+.s .bfb .t{position:absolute;top:50%;right:5%;transform:translateY(-50%);display:grid;gap:8px;justify-items:start;color:var(--navy)}
+.s .bfb b{font-size:clamp(22px,2.6vw,38px);font-weight:900;text-transform:uppercase;line-height:1}
+.s .bfb em{font-style:normal;font-size:15px;color:#3d3a36}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -219,15 +224,17 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .foot .wrap{flex-direction:column}
 
   .s .hero8 img.m{aspect-ratio:auto;width:100%;height:auto}
-  .s .hero8 .tx{top:22px;transform:none;left:16px;right:16px;width:auto;gap:10px}
-  .s .hero8 h1{font-size:34px}
+  .s .hero8 .tx{top:28px;transform:none;left:20px;right:20px;width:auto;gap:10px;justify-items:center;text-align:center}
+  .s .hero8 p{max-width:300px}
+  .s .hero8 h1{font-size:40px}
   .s .hero8 p{font-size:13.5px}
   .s .hero8 .code{padding:4px 8px;font-size:11.5px}
   .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
   .s .rail{grid-auto-columns:44%}
   .s .railwrap::after{width:50px}
-  .s .hint{display:inline}
   .s .avn8{gap:8px}
+  .s .bfb .t{top:20px;transform:none;left:0;right:0;justify-items:center;text-align:center;gap:6px}
+  .s .bfb b{font-size:28px}
   .s .avn8 .cap{left:12px;right:12px;bottom:12px;flex-direction:column;align-items:start}
   .s .avn8 .cap .btn{padding:10px 14px}
   .s .avn8 .cap b{display:none}
@@ -253,10 +260,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 <div class="stage" id="stage"><div class="device"><div class="s bogo" id="site">
 
   <div class="ann" data-note="Antes: 2 renglones con teléfono, mail y 8 links. Ahora 1 renglón: la promo y el envío gratis.">
-    <span data-st="bogo">Buy 1, Get 2nd 50% Off · Code BOGONO26</span>
-    <span data-st="bf">Black Friday · 20% off with code BF2026</span>
+    <span data-st="bogo">Free shipping on orders over $75</span>
+    <span data-st="bf">Free shipping on orders over $75</span>
     <span data-st="gd">Army vs. Navy · Game day Saturday, Dec 12</span>
-    <span class="sep x">|</span><span class="x">Free shipping on $75</span>
+    
   </div>
 
   <header class="hdr" data-note="Header igual que hoy (logo, buscador, menú rojo). La franja Track / Returns / Catalog se baja al footer.">
@@ -270,11 +277,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </header>
 
   <!-- HERO -->
-  <section class="hero8" data-note="HERO: foto nueva de Marpipe con el casting (4 ramas, mismo estudio). El texto va en el espacio libre de la foto: se entiende en 2 segundos. Solo cambia el texto por fecha, la foto se queda.">
-    <img class="d" src="img/v8/hero.jpg" alt="Cuatro amigos con sudaderas AFG de Navy y Army en un estudio beige"><img class="m" src="img/v8/hero_m.jpg" alt="Cuatro amigos con sudaderas AFG de Navy y Army en un estudio beige">
-    <div class="tx" data-st="bogo"><span class="k">Gifts for everyone on your list</span><h1>Buy one,<br>get one<br>50% off</h1><p>Select styles, every branch. Through Sunday.</p><span class="code">Code BOGONO26</span><div class="b"><a class="btn">Shop the sale</a></div></div>
-    <div class="tx" data-st="bf"><span class="k">Black Friday</span><h1>20% off<br>every<br>branch</h1><p>The Everyday Collection. Through Sunday.</p><span class="code">Code BF2026</span><div class="b"><a class="btn">Shop Black Friday</a></div></div>
-    <div class="tx" data-st="gd"><span class="k">Saturday, December 12</span><h1>Army<br>vs. Navy</h1><p>Pick your side.</p><div class="b"><a class="btn">Shop Navy</a><a class="btn">Shop Army</a></div></div>
+  <section class="hero8" data-note="HERO de marca: papá Army e hijo Navy (Marpipe, mismo estudio y casting). Un titular, una línea, un botón. No lleva descuento: el BOGO va más abajo, una sola vez.">
+    <img class="d" src="img/v8/hero_ds.jpg" alt="Papá con hoodie Army e hijo con hoodie Navy Fear the Bones en estudio beige">
+    <img class="m" src="img/v8/hero_ds_m.jpg" alt="Papá con hoodie Army e hijo con hoodie Navy Fear the Bones en estudio beige">
+    <div class="tx"><h1>One for<br>every branch</h1><p>Army, Marine Corps, Navy, Air Force, Coast Guard and Space Force. Since 1996.</p><div class="b"><a class="btn">Shop by branch</a></div></div>
   </section>
 
   <!-- RAMAS -->
@@ -285,15 +291,18 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
     </div>
   </section>
 
-  <!-- BANNER DE DESCUENTO -->
-  <section class="sec promo" data-st="bogo" data-note="BANNER DE DESCUENTO real de la página actual (BOGO), igual que hoy: foto y texto integrados. Desktop 2400×667, celular 1200×1354.">
-    <div class="wrap"><a><img class="d" src="img/live/prebf_d.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"><img class="m" src="img/live/prebf_m.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"></a></div>
+  <!-- BANNER DE DESCUENTO (una sola vez) -->
+  <section class="sec promo" data-st="bogo" data-note="BOGO aparece UNA sola vez: el banner real de la página actual, más chico que antes (ya no es el hero).">
+    <div class="wrap"><a class="pb"><img class="d" src="img/live/prebf_d.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"><img class="m" src="img/live/prebf_m.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"></a></div>
+  </section>
+  <section class="sec promo" data-st="bf" data-note="BLACK FRIDAY: mismo lugar y tamaño, con la foto grupal del mismo estudio y el texto en el espacio libre.">
+    <div class="wrap"><a class="pb bfb"><img class="d" src="img/v8/bf_banner.jpg" alt="Cuatro amigos con sudaderas AFG"><img class="m" src="img/v8/bf_banner_m.jpg" alt="Cuatro amigos con sudaderas AFG"><span class="t"><b>Black Friday</b><em>20% off every branch</em><span class="btn">Shop the sale</span></span></a></div>
   </section>
 
   <!-- BEST SELLERS -->
   <section class="bsx" data-note="BEST SELLERS reales, con flechas, la siguiente tarjeta asomándose y barra de avance para que se note que se desliza. (colección automática de 60 días) en vez de New Arrivals, que convierte 0.79%. Mismo diseño de tarjeta del sitio.">
     <div class="wrap">
-      <div class="sh"><h2 class="h2">Best Sellers <span class="hint">· Swipe →</span></h2><div class="arrows"><button type="button" class="js-l" aria-label="Anterior">‹</button><button type="button" class="js-r" aria-label="Siguiente">›</button></div></div>
+      <div class="sh"><h2 class="h2">Best Sellers</h2><div class="arrows"><button type="button" class="js-l" aria-label="Anterior">‹</button><button type="button" class="js-r" aria-label="Siguiente">›</button></div></div>
       <div class="railwrap"><div class="rail" id="rail"><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-grey.jpg" alt="Army Logo Core T-Shirt (Grey)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-pt-t-shirt-grey.jpg" alt="Air Force PT T-Shirt (Grey)" loading="lazy"></div><p class="pt">Air Force PT T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/army-logo-core-t-shirt-od-green.jpg" alt="Army Logo Core T-Shirt (OD Green)" loading="lazy"></div><p class="pt">Army Logo Core T-Shirt (OD Green)</p><p class="pp"><span data-st="bogo gd">$17.50</span><span data-st="bf"><s>$17.50</s> <b class="now">$14.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-wings-belmont-polo-charcoal.jpg" alt="Air Force Wings Belmont Polo" loading="lazy"></div><p class="pt">Air Force Wings Belmont Polo</p><p class="pp"><span data-st="bogo gd">$42.00</span><span data-st="bf"><s>$42.00</s> <b class="now">$33.60</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/marines-ega-pack-n-go-pullover.jpg" alt="Marines EGA Pack-N-Go Pullover" loading="lazy"></div><p class="pt">Marines EGA Pack-N-Go Pullover</p><p class="pp"><span data-st="bogo gd">$46.00</span><span data-st="bf"><s>$46.00</s> <b class="now">$36.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-t-shirt-.jpg" alt="Air Force Distressed Block Comfort Colors T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$24.00</span><span data-st="bf"><s>$24.00</s> <b class="now">$19.20</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/navy-low-profile-arch-hat.jpg" alt="Navy Low Profile Arch Hat (Navy)" loading="lazy"></div><p class="pt">Navy Low Profile Arch Hat (Navy)</p><p class="pp"><span data-st="bogo gd">$26.00</span><span data-st="bf"><s>$26.00</s> <b class="now">$20.80</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/air-force-distressed-block-comfort-colors-long-sle.jpg" alt="Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)" loading="lazy"></div><p class="pt">Air Force Distressed Block Comfort Colors Long Sleeve T-Shirt (Denim)</p><p class="pp"><span data-st="bogo gd">$30.00</span><span data-st="bf"><s>$30.00</s> <b class="now">$24.00</b></span></p></a><a class="pc"><div class="im"><img src="img/live/p/u-s-navy-flag-icon-forged-by-the-sea-t-shirt-grey.jpg" alt="U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)" loading="lazy"></div><p class="pt">U.S. Navy Flag Icon Forged By The Sea T-Shirt (Grey)</p><p class="pp"><span data-st="bogo gd">$23.00</span><span data-st="bf"><s>$23.00</s> <b class="now">$18.40</b></span></p></a></div></div><div class="bar"><i id="barI"></i></div>
     </div>
   </section>
