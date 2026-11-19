@@ -166,6 +166,14 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .bsx .railwrap::after{background:linear-gradient(90deg,rgba(20,29,60,0),var(--navy))}
 .s .bsx .bar{background:rgba(255,255,255,.18)}.s .bsx .bar i{background:#fff}
 .s .bsx .arrows button{background:#fff;color:var(--navy)}
+/* banner de sale estilo Zara: foto + texto vivo, ligero y con aire */
+.s .sale .sl{display:block;position:relative;overflow:hidden}
+.s .sale img{width:100%;height:auto;transition:transform 1.2s ease}
+.s .sale .sl:hover img{transform:scale(1.02)}
+.s .sale .t{position:absolute;top:50%;transform:translateY(-50%);right:3.5%;width:23%;display:grid;gap:16px;justify-items:start;color:var(--navy)}
+.s .sale .big{font-size:clamp(28px,3.8vw,56px);line-height:.98;font-weight:300;text-transform:uppercase;letter-spacing:-1px}
+.s .sale .sm{font-size:12.5px;letter-spacing:.6px;color:#4a463f}
+.s .sale .go{font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
 /* banner de descuento: más chico que el hero */
 .s .promo .pb{display:block;max-width:1080px;margin:0 auto;position:relative}
 .s .promo img{width:100%;height:auto}
@@ -233,8 +241,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .rail{grid-auto-columns:44%}
   .s .railwrap::after{width:50px}
   .s .avn8{gap:8px}
-  .s .bfb .t{top:20px;transform:none;left:0;right:0;justify-items:center;text-align:center;gap:6px}
-  .s .bfb b{font-size:28px}
+  .s .sale .t{top:24px;transform:none;left:20px;right:20px;width:auto;justify-items:center;text-align:center;gap:12px}
+  .s .sale .big{font-size:30px}
+  .s .sale .sm{display:none}
+  .s .sale .big br:nth-of-type(2){display:none}
   .s .avn8 .cap{left:12px;right:12px;bottom:12px;flex-direction:column;align-items:start}
   .s .avn8 .cap .btn{padding:10px 14px}
   .s .avn8 .cap b{display:none}
@@ -291,12 +301,14 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
     </div>
   </section>
 
-  <!-- BANNER DE DESCUENTO (una sola vez) -->
-  <section class="sec promo" data-st="bogo" data-note="BOGO aparece UNA sola vez: el banner real de la página actual, más chico que antes (ya no es el hero).">
-    <div class="wrap"><a class="pb"><img class="d" src="img/live/prebf_d.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"><img class="m" src="img/live/prebf_m.jpg" alt="Buy one, get one 50% off select items. Use code BOGONO26"></a></div>
-  </section>
-  <section class="sec promo" data-st="bf" data-note="BLACK FRIDAY: mismo lugar y tamaño, con la foto grupal del mismo estudio y el texto en el espacio libre.">
-    <div class="wrap"><a class="pb bfb"><img class="d" src="img/v8/bf_banner.jpg" alt="Cuatro amigos con sudaderas AFG"><img class="m" src="img/v8/bf_banner_m.jpg" alt="Cuatro amigos con sudaderas AFG"><span class="t"><b>Black Friday</b><em>20% off every branch</em><span class="btn">Shop the sale</span></span></a></div>
+  <!-- BANNER DE SALE (editable: foto fija + texto vivo) -->
+  <section class="sec sale" data-st="bogo bf" data-note="BANNER DE SALE editable: la foto se queda, el texto es texto real (no va dentro de la imagen). Para cambiar de promo se cambian 3 líneas en Shopify. Estilo Zara: tipografía grande y ligera, mucho aire, link subrayado.">
+    <div class="wrap"><a class="sl">
+      <img class="d" src="img/v8/bf_banner.jpg" alt="Cuatro amigos con sudaderas AFG en estudio beige">
+      <img class="m" src="img/v8/bf_banner_m.jpg" alt="Cuatro amigos con sudaderas AFG en estudio beige">
+      <span class="t" data-st="bogo"><span class="big">Buy one,<br> get one<br> 50% off</span><span class="sm">Select styles · Code BOGONO26 · Ends Sunday</span><span class="go">Shop the sale</span></span>
+      <span class="t" data-st="bf"><span class="big">Black<br> Friday<br> 20% off</span><span class="sm">Every branch · Code BF2026 · Through Sunday</span><span class="go">Shop the sale</span></span>
+    </a></div>
   </section>
 
   <!-- BEST SELLERS -->
