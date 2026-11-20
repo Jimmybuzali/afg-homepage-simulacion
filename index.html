@@ -209,15 +209,19 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .riv .mini .pc .im{background:#fff}
 .s .riv .mini .pc .pt{color:#e7ebf1;font-size:12px}.s .riv .mini .pc .pp{color:#aab3c2}
 .s .riv .go{justify-self:start;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
-/* ramas con sello oficial sobre navy; al pasar el mouse aparece la foto */
-.s .seals{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-.s .seals a{position:relative;overflow:hidden;background:var(--navy);aspect-ratio:4/5;display:grid;place-items:center;border-radius:2px}
-.s .seals .sl{width:58%;height:auto;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35));transition:transform .5s ease,opacity .5s ease}
-.s .seals .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s ease}
-.s .seals .n{position:absolute;left:0;right:0;bottom:18px;text-align:center;color:#fff;font-size:13px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;z-index:2}
-.s .seals a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,16,34,0) 60%,rgba(10,16,34,.55));opacity:0;transition:opacity .5s ease}
-.s .seals a:hover .ph,.s .seals a:hover::after{opacity:1}
-.s .seals a:hover .sl{opacity:0;transform:scale(.92)}
+/* ramas: mismo formato 3x2, fondo navy y logo blanco; al pasar el mouse aparece la foto */
+.s .lg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.s .lg a{position:relative;overflow:hidden;background:var(--navy);aspect-ratio:4/5;display:grid;place-items:center}
+.s .lg .lo{width:auto;height:auto;max-width:46%;max-height:38%;transition:opacity .5s ease,transform .6s ease}
+.s .lg .lo.w{max-width:58%}
+.s .lg .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease,transform 1s ease}
+.s .lg a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(10,16,34,0),rgba(10,16,34,.42));opacity:0;transition:opacity .6s ease}
+.s .lg .n{position:absolute;z-index:2;left:26px;right:26px;bottom:22px;display:flex;justify-content:space-between;align-items:baseline;color:#fff}
+.s .lg .n b{font-size:clamp(20px,2vw,28px);font-weight:500}
+.s .lg .n i{font-style:normal;font-size:20px;opacity:0;transform:translateX(-6px);transition:all .4s ease}
+.s .lg a:hover .ph,.s .lg a:hover::after{opacity:1}.s .lg a:hover .ph{transform:scale(1.03)}
+.s .lg a:hover .lo{opacity:0;transform:scale(.94)}
+.s .lg a:hover .n i{opacity:1;transform:none}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -275,8 +279,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .hero8 h1{font-size:40px}
   .s .hero8 p{font-size:13.5px}
   .s .hero8 .code{padding:4px 8px;font-size:11.5px}
-  .s .seals{grid-template-columns:repeat(3,1fr);gap:8px}
-  .s .seals .n{font-size:10.5px;bottom:10px;letter-spacing:1px}
+  .s .lg{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
+  .s .lg a{scroll-snap-align:start}
+  .s .lg .n{left:16px;bottom:14px}
   .s .brs9{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
   .s .brs9 a{scroll-snap-align:start}
   .s .brs9.two{grid-auto-columns:82%}
@@ -345,10 +350,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </section>
 
   <!-- RAMAS -->
-  <section class="sec" data-note="SHOP BY BRANCH: sello oficial de cada rama sobre el navy de la marca (AFG tiene licencia oficial). Al pasar el mouse aparece la foto del modelo de esa rama, del mismo estudio.">
+  <section class="sec" data-note="SHOP BY BRANCH: mismo formato 3x2, fondo navy de la marca y el logo oficial de cada rama en blanco. Al pasar el mouse aparece la foto del modelo de esa rama.">
     <div class="wrap">
       <div class="sh"><h2 class="h2">Shop by Branch</h2></div>
-      <div class="seals"><a aria-label="Shop Army"><img class="ph" src="img/v8/b_army.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_army.png" alt="Army seal"><span class="n">Army</span></a><a aria-label="Shop Marine Corps"><img class="ph" src="img/v8/b_marines.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_marines.png" alt="Marine Corps seal"><span class="n">Marine Corps</span></a><a aria-label="Shop Navy"><img class="ph" src="img/v8/b_navy.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_navy.png" alt="Navy seal"><span class="n">Navy</span></a><a aria-label="Shop Air Force"><img class="ph" src="img/v8/b_airforce.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_airforce.png" alt="Air Force seal"><span class="n">Air Force</span></a><a aria-label="Shop Coast Guard"><img class="ph" src="img/v8/b_cg.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_cg.png" alt="Coast Guard seal"><span class="n">Coast Guard</span></a><a aria-label="Shop Space Force"><img class="ph" src="img/v8/b_sf.jpg" alt="" loading="lazy"><img class="sl" src="img/v8/seal_sf.png" alt="Space Force seal"><span class="n">Space Force</span></a></div>
+      <div class="lg"><a aria-label="Shop Army"><img class="ph" src="img/v8/b_army.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_army.png" alt="Army logo"><span class="n"><b>Army</b><i>→</i></span></a><a aria-label="Shop Marine Corps"><img class="ph" src="img/v8/b_marines.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_marines.png" alt="Marine Corps logo"><span class="n"><b>Marine Corps</b><i>→</i></span></a><a aria-label="Shop Navy"><img class="ph" src="img/v8/b_navy.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_navy.png" alt="Navy logo"><span class="n"><b>Navy</b><i>→</i></span></a><a aria-label="Shop Air Force"><img class="ph" src="img/v8/b_airforce.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_airforce.png" alt="Air Force logo"><span class="n"><b>Air Force</b><i>→</i></span></a><a aria-label="Shop Coast Guard"><img class="ph" src="img/v8/b_cg.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_cg.png" alt="Coast Guard logo"><span class="n"><b>Coast Guard</b><i>→</i></span></a><a aria-label="Shop Space Force"><img class="ph" src="img/v8/b_sf.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_sf.png" alt="Space Force logo"><span class="n"><b>Space Force</b><i>→</i></span></a></div>
     </div>
   </section>
 
