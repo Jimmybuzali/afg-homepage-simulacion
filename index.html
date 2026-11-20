@@ -192,43 +192,19 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .brs9 a:hover .n i{opacity:1;transform:none}
 .s .brs9.two{grid-template-columns:1fr 1fr;gap:20px}
 .s .brs9.two img{max-height:780px}
-/* RIVALRY drop */
-.s .riv{background:#111820;color:#fff;margin-top:var(--gap);padding:64px 0 70px}
-.s .riv .rh{text-align:center;display:grid;gap:12px;justify-items:center;margin-bottom:40px}
-.s .riv .new{font-size:12px;letter-spacing:1px;color:#fff;border:1px solid rgba(255,255,255,.45);padding:5px 12px;border-radius:20px}
-.s .riv h2{margin:0;font-size:clamp(32px,4.6vw,64px);font-weight:300;letter-spacing:-1px;line-height:1}
-.s .riv p{margin:0;color:#aab3c2;font-size:15px}
-.s .riv .rg{display:grid;grid-template-columns:1fr 1fr;gap:0}
-.s .riv .side{display:grid;gap:18px;align-content:start;padding:0 22px}
-.s .riv .side+.side{border-left:1px solid rgba(255,255,255,.22)}
+/* RIVALRY compacto: bloque azul, 2 fotos lado a lado */
+.s .riv{background:var(--navy);color:#fff;margin-top:var(--gap);padding:44px 0 48px}
+.s .riv .rh{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+.s .riv .new{order:2;font-size:12px;color:#fff;border:1px solid rgba(255,255,255,.45);padding:4px 11px;border-radius:20px}
+.s .riv h2{margin:0;font-size:clamp(20px,2.2vw,30px);font-weight:400;letter-spacing:.3px}
+.s .riv .rg{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:980px}
 .s .riv .ph{position:relative;display:block;overflow:hidden}
-.s .riv .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;max-height:700px;transition:transform 1s ease}
+.s .riv .ph img{width:100%;aspect-ratio:4/5;object-fit:cover;transition:transform 1s ease}
 .s .riv .ph:hover img{transform:scale(1.03)}
-.s .riv .nm{position:absolute;left:22px;bottom:16px;font-size:clamp(40px,5vw,72px);font-weight:900;text-transform:uppercase;color:#fff;letter-spacing:-1px;text-shadow:0 2px 18px rgba(0,0,0,.25)}
-.s .riv .mini{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.s .riv .mini .pc .im{background:#fff}
-.s .riv .mini .pc .pt{color:#e7ebf1;font-size:12px}.s .riv .mini .pc .pp{color:#aab3c2}
-.s .riv .go{justify-self:start;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
-/* ramas: mismo formato 3x2, fondo navy y logo blanco; al pasar el mouse aparece la foto */
-.s .lg{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 2*20px)/3.35);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-.s .lg::-webkit-scrollbar{display:none}
-.s .lg a{scroll-snap-align:start}
-.s .lgwrap{position:relative}
-.s .lgwrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
-.s .lg a{position:relative;overflow:hidden;background:var(--navy);aspect-ratio:4/5;display:grid;place-items:center}
-.s .lg .lo{width:auto;height:auto;max-width:46%;max-height:38%;transition:opacity .5s ease,transform .6s ease}
-.s .lg .lo.w{max-width:58%}
-.s .lg .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease,transform 1s ease}
-.s .lg a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(10,16,34,0),rgba(10,16,34,.42));opacity:0;transition:opacity .6s ease}
-.s .lg .n{position:absolute;z-index:2;left:26px;right:26px;bottom:22px;display:flex;justify-content:space-between;align-items:baseline;color:#fff}
-.s .lg .n b{font-size:clamp(20px,2vw,28px);font-weight:500}
-.s .lg .n i{font-style:normal;font-size:20px;opacity:0;transform:translateX(-6px);transition:all .4s ease}
-.s .lg a:hover .ph,.s .lg a:hover::after{opacity:1}.s .lg a:hover .ph{transform:scale(1.03)}
-.s .lg a:hover .lo{opacity:0;transform:scale(.94)}
-.s .lg a:hover .n i{opacity:1;transform:none}
-.s .brs8 .im.nv{background:var(--navy);display:grid;place-items:center}
-.s .brs8 .im.nv img{width:auto;height:auto;max-width:54%;max-height:40%;object-fit:contain}
-.s .brs8 .im.nv img.w{max-width:70%}
+.s .riv .ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(10,16,34,0),rgba(10,16,34,.42))}
+.s .riv .n{position:absolute;z-index:2;left:22px;right:22px;bottom:18px;display:flex;justify-content:space-between;align-items:baseline;color:#fff}
+.s .riv .n b{font-size:clamp(16px,1.8vw,24px);font-weight:500}
+.s .riv .n i{font-style:normal;font-size:18px}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -293,12 +269,12 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .brs9{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
   .s .brs9 a{scroll-snap-align:start}
   .s .brs9.two{grid-auto-columns:82%}
-  .s .riv{padding:44px 0 48px}
-  .s .riv .rg{grid-template-columns:1fr;gap:34px}
-  .s .riv .side{padding:0}
-  .s .riv .side+.side{border-left:0;border-top:1px solid rgba(255,255,255,.22);padding-top:34px}
-  .s .riv .mini{grid-template-columns:1fr 1fr}
-  .s .riv .mini .pc:nth-child(n+3){display:none}
+  .s .riv{padding:30px 0 32px}
+  .s .riv .rh{margin-bottom:14px}
+  .s .riv .rg{gap:8px}
+  .s .riv .n{left:10px;right:10px;bottom:10px}
+  .s .riv .n b{font-size:14px}
+  .s .riv .new{font-size:10.5px;padding:3px 8px}
 
   .s .brs9 .n{left:16px;bottom:14px}
   .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
@@ -400,13 +376,13 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
     </div>
   </section>
 
-  <!-- RIVALRY: lanzamiento de colección nueva -->
-  <section class="riv" data-note="RIVALRY como LANZAMIENTO: sección oscura de lado a lado, título grande, las dos fotos juntas separadas por una línea (rivales, sin tocarse) y los productos reales de cada lado debajo. Se ve como drop nuevo, no como otra colección.">
+  <!-- RIVALRY compacto -->
+  <section class="riv" data-note="RIVALRY compacto: dentro de un bloque azul, las dos fotos una al lado de la otra (también en celular), mismo tamaño que antes. Sin filas de productos.">
     <div class="wrap">
-      <div class="rh"><span class="new">New · Limited 2026 drop</span><h2>The 2026 Rivalry Collection</h2><p>Army vs. Navy. Game day is Saturday, December 12.</p></div>
+      <div class="rh"><span class="new">New · Limited 2026 drop</span><h2>The 2026 Rivalry Collection</h2></div>
       <div class="rg">
-        <div class="side"><a class="ph"><img src="img/v8/avn_navy.jpg" alt="Hombre con hoodie Navy Under Armour 2026 Rivalry digi camo" loading="lazy"><span class="nm">Navy</span></a><div class="mini"><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-mens-football-repli.jpg" alt="Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)</p><p class="pp">$120.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-hood-dig.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)</p><p class="pp">$112.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-fleece-f.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)</p><p class="pp">$115.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-playoff-quarter-zip.jpg" alt="Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)</p><p class="pp">$105.00</p></a></div><a class="go">Shop Navy Rivalry</a></div>
-        <div class="side"><a class="ph"><img src="img/v8/avn_army.jpg" alt="Hombre con crewneck Army Nike 2026 Rivalry Beat Navy" loading="lazy"><span class="nm">Army</span></a><div class="mini"><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-american-flag-club-fleece-h.jpg" alt="Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)</p><p class="pp">$105.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-beat-navy-club-fleece-crewn.jpg" alt="Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)</p><p class="pp">$100.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-club-fleece-1-2-top-black.jpg" alt="Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)</p><p class="pp">$90.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-west-point-club-fleece-hood.jpg" alt="Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)</p><p class="pp">$95.00</p></a></div><a class="go">Shop Army Rivalry</a></div>
+        <a class="ph"><img src="img/v8/avn_navy.jpg" alt="Hombre con hoodie Navy Under Armour 2026 Rivalry digi camo" loading="lazy"><span class="n"><b>Shop Navy</b><i>→</i></span></a>
+        <a class="ph"><img src="img/v8/avn_army.jpg" alt="Hombre con crewneck Army Nike 2026 Rivalry Beat Navy" loading="lazy"><span class="n"><b>Shop Army</b><i>→</i></span></a>
       </div>
     </div>
   </section>
