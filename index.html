@@ -210,7 +210,11 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .riv .mini .pc .pt{color:#e7ebf1;font-size:12px}.s .riv .mini .pc .pp{color:#aab3c2}
 .s .riv .go{justify-self:start;font-size:12px;font-weight:500;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
 /* ramas: mismo formato 3x2, fondo navy y logo blanco; al pasar el mouse aparece la foto */
-.s .lg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.s .lg{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 2*20px)/3.35);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.s .lg::-webkit-scrollbar{display:none}
+.s .lg a{scroll-snap-align:start}
+.s .lgwrap{position:relative}
+.s .lgwrap::after{content:"";position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
 .s .lg a{position:relative;overflow:hidden;background:var(--navy);aspect-ratio:4/5;display:grid;place-items:center}
 .s .lg .lo{width:auto;height:auto;max-width:46%;max-height:38%;transition:opacity .5s ease,transform .6s ease}
 .s .lg .lo.w{max-width:58%}
@@ -279,6 +283,7 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .hero8 h1{font-size:40px}
   .s .hero8 p{font-size:13.5px}
   .s .hero8 .code{padding:4px 8px;font-size:11.5px}
+  .s .lgwrap::after{width:40px}
   .s .lg{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
   .s .lg a{scroll-snap-align:start}
   .s .lg .n{left:16px;bottom:14px}
@@ -350,10 +355,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </section>
 
   <!-- RAMAS -->
-  <section class="sec" data-note="SHOP BY BRANCH: mismo formato 3x2, fondo navy de la marca y el logo oficial de cada rama en blanco. Al pasar el mouse aparece la foto del modelo de esa rama.">
+  <section class="sec" data-note="SHOP BY BRANCH en carrusel: se ven ~3 y se desliza para descubrir las demás (flechas, tarjeta asomada y barra). Fondo navy y logo oficial en blanco; al pasar el mouse aparece la foto.">
     <div class="wrap">
-      <div class="sh"><h2 class="h2">Shop by Branch</h2></div>
-      <div class="lg"><a aria-label="Shop Army"><img class="ph" src="img/v8/b_army.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_army.png" alt="Army logo"><span class="n"><b>Army</b><i>→</i></span></a><a aria-label="Shop Marine Corps"><img class="ph" src="img/v8/b_marines.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_marines.png" alt="Marine Corps logo"><span class="n"><b>Marine Corps</b><i>→</i></span></a><a aria-label="Shop Navy"><img class="ph" src="img/v8/b_navy.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_navy.png" alt="Navy logo"><span class="n"><b>Navy</b><i>→</i></span></a><a aria-label="Shop Air Force"><img class="ph" src="img/v8/b_airforce.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_airforce.png" alt="Air Force logo"><span class="n"><b>Air Force</b><i>→</i></span></a><a aria-label="Shop Coast Guard"><img class="ph" src="img/v8/b_cg.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_cg.png" alt="Coast Guard logo"><span class="n"><b>Coast Guard</b><i>→</i></span></a><a aria-label="Shop Space Force"><img class="ph" src="img/v8/b_sf.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_sf.png" alt="Space Force logo"><span class="n"><b>Space Force</b><i>→</i></span></a></div>
+      <div class="sh"><h2 class="h2">Shop by Branch</h2><div class="arrows"><button type="button" class="js-bl" aria-label="Anterior">‹</button><button type="button" class="js-br" aria-label="Siguiente">›</button></div></div>
+      <div class="lgwrap"><div class="lg" id="lgrail"><a aria-label="Shop Army"><img class="ph" src="img/v8/b_army.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_army.png" alt="Army logo"><span class="n"><b>Army</b><i>→</i></span></a><a aria-label="Shop Marine Corps"><img class="ph" src="img/v8/b_marines.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_marines.png" alt="Marine Corps logo"><span class="n"><b>Marine Corps</b><i>→</i></span></a><a aria-label="Shop Navy"><img class="ph" src="img/v8/b_navy.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_navy.png" alt="Navy logo"><span class="n"><b>Navy</b><i>→</i></span></a><a aria-label="Shop Air Force"><img class="ph" src="img/v8/b_airforce.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_airforce.png" alt="Air Force logo"><span class="n"><b>Air Force</b><i>→</i></span></a><a aria-label="Shop Coast Guard"><img class="ph" src="img/v8/b_cg.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_cg.png" alt="Coast Guard logo"><span class="n"><b>Coast Guard</b><i>→</i></span></a><a aria-label="Shop Space Force"><img class="ph" src="img/v8/b_sf.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_sf.png" alt="Space Force logo"><span class="n"><b>Space Force</b><i>→</i></span></a></div></div><div class="bar"><i id="lgbar"></i></div>
     </div>
   </section>
 
@@ -448,6 +453,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   function step(dir){var c=rail.querySelector('.pc');rail.scrollBy({left:dir*(c?c.getBoundingClientRect().width+16:300),behavior:'smooth'});}
   document.querySelector('.js-l').addEventListener('click',function(){step(-1)});
   document.querySelector('.js-r').addEventListener('click',function(){step(1)});
+  var lr=document.getElementById('lgrail'),lb=document.getElementById('lgbar');function lstep(d){var c=lr.querySelector('a');lr.scrollBy({left:d*(c?c.getBoundingClientRect().width+20:300),behavior:'smooth'});}
+  document.querySelector('.js-bl').addEventListener('click',function(){lstep(-1)});document.querySelector('.js-br').addEventListener('click',function(){lstep(1)});
+  function lupd(){var m=lr.scrollWidth-lr.clientWidth,f=lr.clientWidth/lr.scrollWidth;lb.style.width=(f*100)+'%';lb.style.left=(m>0?lr.scrollLeft/m*(100-f*100):0)+'%';}lr.addEventListener('scroll',lupd);window.addEventListener('resize',lupd);setTimeout(lupd,300);
   var bi=document.getElementById('barI');function upd(){var m=rail.scrollWidth-rail.clientWidth;var f=rail.clientWidth/rail.scrollWidth;bi.style.width=(f*100)+'%';bi.style.left=(m>0?rail.scrollLeft/m*(100-f*100):0)+'%';}rail.addEventListener('scroll',upd);window.addEventListener('resize',upd);setTimeout(upd,300);
 })();
 </script>
