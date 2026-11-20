@@ -190,6 +190,8 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .brs9 .n b{font-size:clamp(20px,2vw,28px);font-weight:500;letter-spacing:.2px}
 .s .brs9 .n i{font-style:normal;font-size:20px;opacity:0;transform:translateX(-6px);transition:all .4s ease}
 .s .brs9 a:hover .n i{opacity:1;transform:none}
+.s .brs9.two{grid-template-columns:1fr 1fr;gap:20px}
+.s .brs9.two img{max-height:780px}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -249,6 +251,7 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .hero8 .code{padding:4px 8px;font-size:11.5px}
   .s .brs9{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:72%;overflow-x:auto;scrollbar-width:none;gap:10px;scroll-snap-type:x mandatory}
   .s .brs9 a{scroll-snap-align:start}
+  .s .brs9.two{grid-auto-columns:82%}
   .s .brs9 .n{left:16px;bottom:14px}
   .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
   .s .rail{grid-auto-columns:44%}
@@ -337,13 +340,25 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 
 
 
+
+  <!-- COLECCIONES -->
+  <section class="sec" data-note="COLECCIONES de temporada: Family Collection (192 productos) y Holiday Pajamas (flannel pants). Mismo estudio y casting. Se cambian por temporada (Veterans, Gifts…).">
+    <div class="wrap">
+      <div class="sh"><h2 class="h2">Collections</h2></div>
+      <div class="brs9 two">
+        <a><img src="img/v8/col_family.jpg" alt="Familia con sudaderas Army en estudio beige" loading="lazy"><span class="n"><b>Family Collection</b><i>→</i></span></a>
+        <a><img src="img/v8/col_pj.jpg" alt="Pareja con flannel pants de cuadros y sudaderas Navy" loading="lazy"><span class="n"><b>Holiday Pajamas</b><i>→</i></span></a>
+      </div>
+    </div>
+  </section>
+
   <!-- ARMY VS NAVY -->
-  <section class="sec" data-note="ARMY VS NAVY: dos fotos de la campaña Rivalry que ya hicimos, mismo estadio, mismo encuadre. Cada lado separado.">
+  <section class="sec" data-note="ARMY VS NAVY: dos fotos nuevas en el mismo estudio (sin estadio, menos contexto), mismo encuadre, productos Rivalry 2026. Cada lado separado.">
     <div class="wrap">
       <div class="sh"><h2 class="h2">2026 Army vs. Navy Rivalry</h2><span class="va">Game day Dec 12</span></div>
-      <div class="avn8">
-        <a><img src="img/v8/avn_navy.jpg" alt="Fan de Navy con hoodie digi camo en el estadio"><span class="cap"><b>Navy</b><span class="btn w">Shop Navy</span></span></a>
-        <a><img src="img/v8/avn_army.jpg" alt="Fan de Army con crewneck Beat Navy en el estadio"><span class="cap"><b>Army</b><span class="btn w">Shop Army</span></span></a>
+      <div class="brs9 two">
+        <a><img src="img/v8/avn_navy.jpg" alt="Hombre con hoodie Navy Under Armour 2026 Rivalry digi camo" loading="lazy"><span class="n"><b>Shop Navy</b><i>→</i></span></a>
+        <a><img src="img/v8/avn_army.jpg" alt="Hombre con crewneck Army Nike 2026 Rivalry Beat Navy" loading="lazy"><span class="n"><b>Shop Army</b><i>→</i></span></a>
       </div>
     </div>
   </section>
