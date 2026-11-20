@@ -223,6 +223,15 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .mail2 p{margin:6px 0 0;font-size:13.5px;color:var(--mute)}
 .s .mail2 .f2{flex:1;max-width:460px;display:flex;justify-content:space-between;border-bottom:1.5px solid var(--ink);padding:10px 0;font-size:14px}
 .s .mail2 .f2 span{color:#8b8b8b}.s .mail2 .f2 b{font-weight:500;color:var(--ink)}
+/* carrusel de productos Rivalry dentro del bloque azul */
+.s .riv .rsh{display:flex;justify-content:space-between;align-items:center;margin:34px 0 14px}
+.s .riv .rsh span{font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#cfd5e2}
+.s .riv .arrows button{background:#fff;color:var(--navy);border:0}
+.s .riv .rrail{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 4*14px)/5.3);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.s .riv .rrail::-webkit-scrollbar{display:none}
+.s .riv .rrail .pc .im{background:#fff}
+.s .riv .rrail .pc .pt{color:#fff}.s .riv .rrail .pc .pp{color:#cfd5e2}
+.s .riv .rbar{background:rgba(255,255,255,.18);margin-top:20px}.s .riv .rbar i{background:#fff}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -302,6 +311,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   .s .riv .n{left:10px;right:10px;bottom:10px}
   .s .riv .n b{font-size:14px}
   .s .riv .new{font-size:10.5px;padding:3px 8px}
+  .s .riv .rrail{grid-auto-columns:42%;gap:10px}
+  .s .riv .rsh{margin:22px 0 10px}
+  .s .riv .rsh .arrows{display:none}
 
   .s .brs9 .n{left:16px;bottom:14px}
   .s .brs8{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:40%;overflow-x:auto;scrollbar-width:none;gap:10px}
@@ -405,13 +417,16 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </section>
 
   <!-- RIVALRY compacto -->
-  <section class="riv" data-note="RIVALRY compacto: dentro de un bloque azul, las dos fotos una al lado de la otra (también en celular), mismo tamaño que antes. Sin filas de productos.">
+  <section class="riv" data-note="RIVALRY compacto en azul: las dos fotos lado a lado y abajo un carrusel limpio con los productos reales de la colección (Navy y Army intercalados).">
     <div class="wrap">
       <div class="rh"><span class="new">New · Limited 2026 drop</span><h2>The 2026 Rivalry Collection</h2></div>
       <div class="rg">
         <a class="ph"><img src="img/v8/avn_navy.jpg" alt="Hombre con hoodie Navy Under Armour 2026 Rivalry digi camo" loading="lazy"><span class="n"><b>Shop Navy</b><i>→</i></span></a>
         <a class="ph"><img src="img/v8/avn_army.jpg" alt="Hombre con crewneck Army Nike 2026 Rivalry Beat Navy" loading="lazy"><span class="n"><b>Shop Army</b><i>→</i></span></a>
       </div>
+      <div class="rsh"><span>Shop the collection</span><div class="arrows"><button type="button" class="js-rl" aria-label="Anterior">‹</button><button type="button" class="js-rr" aria-label="Siguiente">›</button></div></div>
+      <div class="rrail" id="rrail"><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-mens-football-repli.jpg" alt="Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Men&#x27;s Football Replica Jersey (White)</p><p class="pp">$120.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-american-flag-club-fleece-h.jpg" alt="Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry American Flag Club Fleece Hood (Sport Green)</p><p class="pp">$105.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-hood-dig.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Hood (Digi Camo)</p><p class="pp">$112.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-beat-navy-club-fleece-crewn.jpg" alt="Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Beat Navy Club Fleece Crewneck (Black)</p><p class="pp">$100.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-icon-taped-fleece-f.jpg" alt="Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Icon Taped Fleece Full Zip (Tidal Blue)</p><p class="pp">$115.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-club-fleece-1-2-top-black.jpg" alt="Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry Club Fleece 1/2 Top (Black)</p><p class="pp">$90.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-playoff-quarter-zip.jpg" alt="Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Playoff Quarter Zip (Tidal Blue)</p><p class="pp">$105.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-west-point-club-fleece-hood.jpg" alt="Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry West Point Club Fleece Hood (Black)</p><p class="pp">$95.00</p></a><a class="pc"><div class="im"><img src="img/live/p/navy-under-armour-2026-rivalry-knit-beanie-tidal-b.jpg" alt="Navy Under Armour 2026 Rivalry Knit Beanie (Tidal Blue)" loading="lazy"></div><p class="pt">Navy Under Armour 2026 Rivalry Knit Beanie (Tidal Blue)</p><p class="pp">$40.00</p></a><a class="pc"><div class="im"><img src="img/live/p/army-nike-2026-rivalry-ivy-soldier-scarf-black-gre.jpg" alt="Army Nike 2026 Rivalry IVY Soldier Scarf (Black/Green)" loading="lazy"></div><p class="pt">Army Nike 2026 Rivalry IVY Soldier Scarf (Black/Green)</p><p class="pp">$46.00</p></a></div>
+      <div class="bar rbar"><i id="rbarI"></i></div>
     </div>
   </section>
 
@@ -461,6 +476,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   function step(dir){var c=rail.querySelector('.pc');rail.scrollBy({left:dir*(c?c.getBoundingClientRect().width+16:300),behavior:'smooth'});}
   document.querySelector('.js-l').addEventListener('click',function(){step(-1)});
   document.querySelector('.js-r').addEventListener('click',function(){step(1)});
+  var rr=document.getElementById('rrail'),rb=document.getElementById('rbarI');function rstep(d){var c=rr.querySelector('.pc');rr.scrollBy({left:d*(c?c.getBoundingClientRect().width+14:300),behavior:'smooth'});}
+  document.querySelector('.js-rl').addEventListener('click',function(){rstep(-1)});document.querySelector('.js-rr').addEventListener('click',function(){rstep(1)});
+  function rupd(){var m=rr.scrollWidth-rr.clientWidth,f=rr.clientWidth/rr.scrollWidth;rb.style.width=(f*100)+'%';rb.style.left=(m>0?rr.scrollLeft/m*(100-f*100):0)+'%';}rr.addEventListener('scroll',rupd);window.addEventListener('resize',rupd);setTimeout(rupd,300);
   var bi=document.getElementById('barI');function upd(){var m=rail.scrollWidth-rail.clientWidth;var f=rail.clientWidth/rail.scrollWidth;bi.style.width=(f*100)+'%';bi.style.left=(m>0?rail.scrollLeft/m*(100-f*100):0)+'%';}rail.addEventListener('scroll',upd);window.addEventListener('resize',upd);setTimeout(upd,300);
 })();
 </script>
