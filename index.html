@@ -226,6 +226,9 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
 .s .lg a:hover .ph,.s .lg a:hover::after{opacity:1}.s .lg a:hover .ph{transform:scale(1.03)}
 .s .lg a:hover .lo{opacity:0;transform:scale(.94)}
 .s .lg a:hover .n i{opacity:1;transform:none}
+.s .brs8 .im.nv{background:var(--navy);display:grid;place-items:center}
+.s .brs8 .im.nv img{width:auto;height:auto;max-width:54%;max-height:40%;object-fit:contain}
+.s .brs8 .im.nv img.w{max-width:70%}
 /* carrusel: que se note que se desliza */
 .s .railwrap{position:relative}
 .s .railwrap::after{content:"";position:absolute;top:0;right:0;bottom:46px;width:90px;background:linear-gradient(90deg,rgba(255,255,255,0),#fff);pointer-events:none}
@@ -355,10 +358,10 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   </section>
 
   <!-- RAMAS -->
-  <section class="sec" data-note="SHOP BY BRANCH en carrusel: se ven ~3 y se desliza para descubrir las demás (flechas, tarjeta asomada y barra). Fondo navy y logo oficial en blanco; al pasar el mouse aparece la foto.">
+  <section class="sec" data-note="SHOP BY BRANCH: idéntico al formato con personas (mismo tamaño, SHOP X abajo, en celular se desliza), con fondo navy y el logo oficial en blanco.">
     <div class="wrap">
-      <div class="sh"><h2 class="h2">Shop by Branch</h2><div class="arrows"><button type="button" class="js-bl" aria-label="Anterior">‹</button><button type="button" class="js-br" aria-label="Siguiente">›</button></div></div>
-      <div class="lgwrap"><div class="lg" id="lgrail"><a aria-label="Shop Army"><img class="ph" src="img/v8/b_army.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_army.png" alt="Army logo"><span class="n"><b>Army</b><i>→</i></span></a><a aria-label="Shop Marine Corps"><img class="ph" src="img/v8/b_marines.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_marines.png" alt="Marine Corps logo"><span class="n"><b>Marine Corps</b><i>→</i></span></a><a aria-label="Shop Navy"><img class="ph" src="img/v8/b_navy.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_navy.png" alt="Navy logo"><span class="n"><b>Navy</b><i>→</i></span></a><a aria-label="Shop Air Force"><img class="ph" src="img/v8/b_airforce.jpg" alt="" loading="lazy"><img class="lo w" src="img/v8/logo_airforce.png" alt="Air Force logo"><span class="n"><b>Air Force</b><i>→</i></span></a><a aria-label="Shop Coast Guard"><img class="ph" src="img/v8/b_cg.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_cg.png" alt="Coast Guard logo"><span class="n"><b>Coast Guard</b><i>→</i></span></a><a aria-label="Shop Space Force"><img class="ph" src="img/v8/b_sf.jpg" alt="" loading="lazy"><img class="lo" src="img/v8/logo_sf.png" alt="Space Force logo"><span class="n"><b>Space Force</b><i>→</i></span></a></div></div><div class="bar"><i id="lgbar"></i></div>
+      <div class="sh"><h2 class="h2">Shop by Branch</h2></div>
+      <div class="brs8" id="lgrail"><a><div class="im nv"><img class="" src="img/v8/logo_army.png" alt="Army logo" loading="lazy"></div><span class="l">Shop Army</span></a><a><div class="im nv"><img class="" src="img/v8/logo_marines.png" alt="Marines logo" loading="lazy"></div><span class="l">Shop Marines</span></a><a><div class="im nv"><img class="w" src="img/v8/logo_navy.png" alt="Navy logo" loading="lazy"></div><span class="l">Shop Navy</span></a><a><div class="im nv"><img class="w" src="img/v8/logo_airforce.png" alt="Air Force logo" loading="lazy"></div><span class="l">Shop Air Force</span></a><a><div class="im nv"><img class="" src="img/v8/logo_cg.png" alt="Coast Guard logo" loading="lazy"></div><span class="l">Shop Coast Guard</span></a><a><div class="im nv"><img class="" src="img/v8/logo_sf.png" alt="Space Force logo" loading="lazy"></div><span class="l">Shop Space Force</span></a></div>
     </div>
   </section>
 
@@ -453,9 +456,6 @@ body{background:var(--frame);color:var(--frame-fg);font-family:var(--f);font-siz
   function step(dir){var c=rail.querySelector('.pc');rail.scrollBy({left:dir*(c?c.getBoundingClientRect().width+16:300),behavior:'smooth'});}
   document.querySelector('.js-l').addEventListener('click',function(){step(-1)});
   document.querySelector('.js-r').addEventListener('click',function(){step(1)});
-  var lr=document.getElementById('lgrail'),lb=document.getElementById('lgbar');function lstep(d){var c=lr.querySelector('a');lr.scrollBy({left:d*(c?c.getBoundingClientRect().width+20:300),behavior:'smooth'});}
-  document.querySelector('.js-bl').addEventListener('click',function(){lstep(-1)});document.querySelector('.js-br').addEventListener('click',function(){lstep(1)});
-  function lupd(){var m=lr.scrollWidth-lr.clientWidth,f=lr.clientWidth/lr.scrollWidth;lb.style.width=(f*100)+'%';lb.style.left=(m>0?lr.scrollLeft/m*(100-f*100):0)+'%';}lr.addEventListener('scroll',lupd);window.addEventListener('resize',lupd);setTimeout(lupd,300);
   var bi=document.getElementById('barI');function upd(){var m=rail.scrollWidth-rail.clientWidth;var f=rail.clientWidth/rail.scrollWidth;bi.style.width=(f*100)+'%';bi.style.left=(m>0?rail.scrollLeft/m*(100-f*100):0)+'%';}rail.addEventListener('scroll',upd);window.addEventListener('resize',upd);setTimeout(upd,300);
 })();
 </script>
